@@ -10,16 +10,23 @@ const chalk = require('chalk');
 /* Connect to Database MongoDB */
 mongoose.connect(process.env.MONGODB)
 .then(() => {
-    console.log(chalk.greenBright("connected to mongoDB"));
+  console.log(chalk.greenBright("connected to mongoDB"));
+
+  /* Connect to Port */
+  const PORT = process.env.PORT || 3007;
+  app.listen(PORT, () => {
+    console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`)); // הועבר מלמטה
+  });
 })
-.catch(() => {
-    console.log(chalk.red("could not connect to mongoDB"));
+.catch((error) => {
+  console.log(chalk.red("could not connect to mongoDB"));
+  console.log(error);
 });
 
 
 /* Connect to Port */
-const PORT = process.env.PORT || 3007;
+// const PORT = process.env.PORT || 3007;
 
-app.listen(PORT, () => {
-  console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`));
-});
+// app.listen(PORT, () => {
+//   console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`));
+// });

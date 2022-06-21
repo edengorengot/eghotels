@@ -1,7 +1,12 @@
 {
   "name": "server",
   "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Eden Gorengot",
+  "license": "",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "node ./config/connection",
     "dev": "nodemon ./config/connection"
