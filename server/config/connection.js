@@ -22,11 +22,3 @@ mongoose.connect(process.env.MONGODB)
   console.log(chalk.red("could not connect to mongoDB"));
   console.log(error);
 });
-
-
-/* Connect to Port */
-// const PORT = process.env.PORT || 3007;
-
-// app.listen(PORT, () => {
-//   console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`));
-// });

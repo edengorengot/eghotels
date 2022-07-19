@@ -24,7 +24,7 @@ const usersSchema = new mongoose.Schema({
     mobilePhone: {
         type: String,
         required: true,
-        minlength: 9,
+        minlength: 10,
         maxlength: 10,
         unique: true
     },
@@ -32,7 +32,7 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: false,
         minlength: 9,
-        maxlength: 10,
+        maxlength: 9,
     },
     password: {
         type: String,
@@ -58,9 +58,50 @@ const Users = mongoose.model("Users", usersSchema);
 
 
 /* Actions */
+const selectUserByID = (_id) => {
+    return Users.findById({_id}).select('-password');
+};
+
+const selectUserByEmail = (email) => {
+    return Users.find({email}).select('-password');
+};
+
+const insertNewUser = (firstName, lastName, email, mobilePhone, telephone, password, profileImg) => {
+    let user = new Users({
+        firstName,
+        lastName,
+        email,
+        mobilePhone,
+        telephone,
+        password,
+        profileImg
+    });
+    return user.save();
+};
+
+const deleteUser = (_id) => {
+    // console.log(_id);
+    console.log(Users.findById({_id}));
+    // Users.findByIdAndDelete({_id});
+    // Users.find
+};
+
+const deleteAll = () => {
+    Users.deleteMany({});
+};
+
+const updateUser = (id) => {
+    // Users.find({email});
+
+};
+
 
 
 module.exports = {
-    // selectUserByEmail,
-    // insertUser,
+    selectUserByID,
+    selectUserByEmail,
+    insertNewUser,
+    deleteUser,
+    deleteAll,
+    updateUser,
 };
