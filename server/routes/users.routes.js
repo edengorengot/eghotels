@@ -32,9 +32,8 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.delete('/deleteUser', async (req, res) => { // auth needed
+router.delete('/deleteuser', async (req, res) => { // auth needed
   try {
-    // console.log(req.body.id);
     let databaseChecker = await userModel.selectUserByID(req.body.id);
     console.log(databaseChecker);
     if (databaseChecker) {
@@ -50,7 +49,17 @@ router.delete('/deleteUser', async (req, res) => { // auth needed
   }
 });
 
-router.get('/userById', async (req, res) => {
+router.delete('/deleteall', async (req, res) => { // auth needed
+  try {
+    const deletedUsers = await userModel.deleteAll();
+    console.log(deletedUsers);
+    res.json('All users deleted!');
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong...", err });
+  }
+});
+
+router.get('/userbyid', async (req, res) => { // auth needed
   try {
     let databaseChecker = await userModel.selectUserByID(req.body.id);
     res.json(databaseChecker);
@@ -59,7 +68,7 @@ router.get('/userById', async (req, res) => {
   }
 });
 
-router.get('/userByEmail', async (req, res) => {
+router.get('/userbyemail', async (req, res) => { // auth needed
   try {
     let databaseChecker = await userModel.selectUserByEmail(req.body.email);
     if (databaseChecker.length === 0) {
@@ -68,60 +77,42 @@ router.get('/userByEmail', async (req, res) => {
       res.json(databaseChecker[0]);
     }
   } catch (err) {
+    res.status(401).json({ message: "User does not exists.", err });
+  }
+});
+
+router.get('/allusers', async (req, res) => { // auth needed
+  try {
+    let databaseChecker = await userModel.selectALLUsers();
+    res.json(databaseChecker);
+  } catch (err) {
     res.status(401).json({ err });
   }
 });
 
-// router.get('/userById', async (req, res) => {
-//   try {
-    
-//   } catch (err) {
-//     res.status(401).json({ err });
-//   }
-// });
+router.patch('/update', async (req, res) => { // auth needed
+  try {
+    let id = req.headers.id;
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
 
-// HTTP request methods: GET POST PUT DELETE PATCH
-// GET: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-// POST: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
-// PUT: The PUT method replaces all current representations of the target resource with the request payload.
-// DELETE: The DELETE method deletes the specified resource.
-// PATCH: The PATCH method applies partial modifications to a resource.
+    let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
 
+    if (validateData.password) {
+      hashedPassword = await bcrypt.createHash(validateData.password);
+      validateData.password = hashedPassword;
+    };
 
-
-
-// router.get('myuser', auth, async (req, res) => {
-//   try {
-  // const user = await User.findById(req.user._id).select("-password");
-  // res.send(user);
-//   } catch (err) {
-//     res.status(401).json({ err });
-//   }
-// })
+    let newUserData = await userModel.updateUserData(id, validateData);
 
 
-// router.get('allusers', auth, async (req, res) => {
-//   try {
-//     const users = await User.find({}).select(["-password", "-__v"]);
-//     res.json(users);
-//   } catch (err) {
-//     res.status(401).json({ err });
-//   }
-// })
-
-
-
-
-
-
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    let databaseChecker = await userModel.selectUserByID(id);
+    res.json({ message: "User was updated", databaseChecker });
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong...", err });
+  }
 });
-
-
-
-
 
 module.exports = router;

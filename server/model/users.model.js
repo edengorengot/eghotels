@@ -66,6 +66,10 @@ const selectUserByEmail = (email) => {
     return Users.find({email}).select('-password');
 };
 
+const selectALLUsers = () => {
+    return Users.find({}).select('-password');
+};
+
 const insertNewUser = (firstName, lastName, email, mobilePhone, telephone, password, profileImg) => {
     let user = new Users({
         firstName,
@@ -79,29 +83,30 @@ const insertNewUser = (firstName, lastName, email, mobilePhone, telephone, passw
     return user.save();
 };
 
-const deleteUser = (_id) => {
-    // console.log(_id);
-    console.log(Users.findById({_id}));
-    // Users.findByIdAndDelete({_id});
-    // Users.find
+const deleteUser = (id) => {
+    return Users.findOneAndDelete({ _id: id }, (err, deletedUser) => {
+        if (err) {
+            console.log("Error:", err);
+        } else{
+            console.log("Deleted:", deletedUser);
+        }
+    });
 };
 
 const deleteAll = () => {
-    Users.deleteMany({});
+    return Users.deleteMany({});
 };
 
-const updateUser = (id) => {
-    // Users.find({email});
-
+const updateUserData = (id, newUserData) => {
+    return Users.findByIdAndUpdate(id, newUserData);
 };
-
-
 
 module.exports = {
     selectUserByID,
     selectUserByEmail,
+    selectALLUsers,
     insertNewUser,
     deleteUser,
     deleteAll,
-    updateUser,
+    updateUserData,
 };
