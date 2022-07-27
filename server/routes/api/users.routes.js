@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const userValidation = require('../validation/users.validation');
-const userModel = require('../model/users.model');
-const bcrypt = require('../config/bcrypt');
+const userValidation = require('../../validation/users.validation');
+const userModel = require('../../model/users.model');
+const bcrypt = require('../../config/bcrypt');
+const jwt = require('../../config/jwt');
+const authMiddleware = require('../../middleware/auth.middleware');
 
 
 
@@ -32,9 +34,41 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.delete('/deleteuser', async (req, res) => { // auth needed
+router.post('/login', async (req, res) => {
   try {
-    let databaseChecker = await userModel.selectUserByID(req.body.id);
+    let validateData = await userValidation.validateLoginUsersSchema.validateAsync(req.body);
+    let databaseChecker = await userModel.selectUserByEmail(validateData.email);
+
+    if (databaseChecker.length === 1) {
+      let userData = databaseChecker[0];
+      let passwordChecker = await bcrypt.compareHash(validateData.password, userData.password);
+
+      if (passwordChecker) {
+        let jwtData = await jwt.createToken({
+          id: userData._id,
+          email: userData.email,
+        });
+        res.json({ token: jwtData });
+      } else {
+        res.json({ message: "The password are not match." });
+      }
+    } else {
+      res.json({ message: "There are no user with this email..." });
+    }    
+  } catch (err) {
+    res.status(401).json({ err });
+  }
+});
+
+router.delete('/deleteuser', authMiddleware, async (req, res) => {
+  try {
+    let id = req.userData.id;
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let databaseChecker = await userModel.selectUserByID(id);
     console.log(databaseChecker);
     if (databaseChecker) {
       userModel.deleteUser(databaseChecker._id);
@@ -49,7 +83,7 @@ router.delete('/deleteuser', async (req, res) => { // auth needed
   }
 });
 
-router.delete('/deleteall', async (req, res) => { // auth needed
+router.delete('/deleteall', authMiddleware, async (req, res) => {
   try {
     const deletedUsers = await userModel.deleteAll();
     console.log(deletedUsers);
@@ -59,18 +93,30 @@ router.delete('/deleteall', async (req, res) => { // auth needed
   }
 });
 
-router.get('/userbyid', async (req, res) => { // auth needed
+router.get('/userbyid', authMiddleware, async (req, res) => {
   try {
-    let databaseChecker = await userModel.selectUserByID(req.body.id);
+    let id = req.userData.id;
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let databaseChecker = await userModel.selectUserByID(id);
     res.json(databaseChecker);
   } catch (err) {
     res.status(401).json({ message: "User does not exists.", err });
   }
 });
 
-router.get('/userbyemail', async (req, res) => { // auth needed
+router.get('/userbyemail', authMiddleware, async (req, res) => {
   try {
-    let databaseChecker = await userModel.selectUserByEmail(req.body.email);
+    let email = req.userData.email;
+    if (!email) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let databaseChecker = await userModel.selectUserByEmail(email);
     if (databaseChecker.length === 0) {
       res.json({ message: "User does not exists." });
     } else {
@@ -81,7 +127,7 @@ router.get('/userbyemail', async (req, res) => { // auth needed
   }
 });
 
-router.get('/allusers', async (req, res) => { // auth needed
+router.get('/allusers', authMiddleware, async (req, res) => {
   try {
     let databaseChecker = await userModel.selectALLUsers();
     res.json(databaseChecker);
@@ -90,9 +136,9 @@ router.get('/allusers', async (req, res) => { // auth needed
   }
 });
 
-router.patch('/update', async (req, res) => { // auth needed
+router.patch('/update', authMiddleware, async (req, res) => {
   try {
-    let id = req.headers.id;
+    let id = req.userData.id;
     if (!id) {
       res.status(401).json({ message: "There is no ID in the request." });
       return;

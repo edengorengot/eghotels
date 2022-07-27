@@ -63,7 +63,8 @@ const selectUserByID = (_id) => {
 };
 
 const selectUserByEmail = (email) => {
-    return Users.find({email}).select('-password');
+    // return Users.find({email}).select('-password');
+    return Users.find({email});
 };
 
 const selectALLUsers = () => {

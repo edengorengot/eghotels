@@ -2,7 +2,6 @@
 /* Module dependencies */
 const dotenv = require('dotenv').config();
 const app = require('../app');
-// const http = require('http');
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 
@@ -15,7 +14,7 @@ mongoose.connect(process.env.MONGODB)
   /* Connect to Port */
   const PORT = process.env.PORT || 3007;
   app.listen(PORT, () => {
-    console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`)); // הועבר מלמטה
+    console.log(chalk.yellow(`The server is listening to port: ${PORT} || Link: http://localhost:${PORT}/`));
   });
 })
 .catch((error) => {
