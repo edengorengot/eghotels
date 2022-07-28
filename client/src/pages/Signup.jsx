@@ -61,13 +61,18 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (inputPassword !== inputPasswordRepeat) {
-            console.log("the passwords are not the same...");
+        let passwordChecker = (inputPassword, inputPasswordRepeat) => {
+            if (inputPassword === inputPasswordRepeat) {
+                return true;
+            } else {
+                return false;
+            };
             
-        }
-
-
-
+            // if (inputPassword !== inputPasswordRepeat) {
+            //     console.log("the passwords are not the same...");
+                
+            // }
+        };
         // if (
         //     inputText.title.trim() &&
         //     inputText.title.length >= 3 &&
@@ -80,13 +85,18 @@ const Signup = () => {
         //   } else {
         //     alert("Please write an item between 3 to 20 letters");
         //   }
-
-
-
+        console.log("firstName", inputFirstName);
+        console.log("lastName", inputLastName);
+        console.log("email", inputEmail);
+        console.log("mobilePhone", inputMobilePhone);
+        console.log("telephone", inputTelephone);
+        console.log("password", inputPassword);
+        console.log("passwordRepeat", inputPasswordRepeat);
+        console.log("profileImg", inputProfileImg);
 
         const validationCheck = Joi.validate(
             {
-                firstNmae: inputFirstName,
+                firstName: inputFirstName,
                 lastName: inputLastName,
                 email: inputEmail,
                 mobilePhone: inputMobilePhone,
@@ -97,14 +107,32 @@ const Signup = () => {
             },
             signupSchema
         );
-        console.log("validated Values:", validationCheck);
+        console.log("Validated Values:", validationCheck);
+        console.log("Password Checker:", passwordChecker());
+
+        console.log(validationCheck.error);
 
         if (validationCheck.error) {
             toast.error("One of the values is incorrect...");
         } else {
-            console.log(1234);
-        }
-
+            console.log("here!!!!!!!!!!!!!!!!!!!!!!!!");
+            axios.post(
+                '/api/users/signup',
+                {
+                    firstName: inputFirstName,
+                    lastName: inputLastName,
+                    email: inputEmail,
+                    mobilePhone: inputMobilePhone,
+                    telephone: inputTelephone,
+                    password: inputPassword,
+                    profileImg: inputProfileImg,
+                }
+            )
+            .then((response) => {
+                console.log("response", response);
+            });
+            console.log("here is my test!");
+        };
     };
 
     return (

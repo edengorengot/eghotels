@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 
 // add Axios to React
-// import axios from "axios";
+import axios from "axios";
 
 // add Bootstrap to React
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
@@ -22,32 +22,19 @@ import reportWebVitals from './reportWebVitals';
 // Redux store
 
 
+// axios config
+axios.defaults.baseURL = "http://localhost:3007/";
 
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
 
-// // axios config
-// // axios will add this url to each request if the url is not full
-// axios.defaults.baseURL = "http://localhost:3007/api";
-
-// // axios will add this config to each request
-// axios.interceptors.request.use((config) => {
-//   // get token from local storage
-//   const token = localStorage.getItem("tokenKey");
-//   // chack if there is token in local storage
-//   if (token) {
-//     // add token to headers for secure routes
-//     config.headers["x-user-token"] = token;
-//   }
-
-//   // config.headers["x-user-token"] =
-//   // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyZGE2YTMxYjdmMmZiNmViODQ4ZWYiLCJiaXoiOnRydWUsImlhdCI6MTY0ODU0ODYyN30.8vA-CYPBTp6R_BlZzUumXNJO_fgybFaU6y5I6a7enwc";
-
-//   // data format
-//   config.headers["Content-Type"] = "application/json";
-//   return config;
-// });
-
-
-
+  if (token) {
+    config.headers["token"] = token;
+  };
+  // data format
+  config.headers["Content-Type"] = "application/json";
+  return config;
+});
 
 
 

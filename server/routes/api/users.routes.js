@@ -11,6 +11,8 @@ const authMiddleware = require('../../middleware/auth.middleware');
 router.post('/signup', async (req, res) => {
   try {
     let validateData = await userValidation.validateUsersSchema.validateAsync(req.body);
+
+    console.log(validateData);
     let hashedPassword = await bcrypt.createHash(validateData.password);
     let databaseChecker = await userModel.selectUserByEmail(validateData.email);
 
