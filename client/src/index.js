@@ -1,14 +1,16 @@
+/* Imports */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-
-// add Axios to React
-import axios from "axios";
 
 // add Bootstrap to React
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 
+// Router
+import { BrowserRouter as Router } from 'react-router-dom';
+
+// add Axios to React
+import axios from "axios";
 
 // react-toastify
 import "react-toastify/dist/ReactToastify.css";
@@ -18,9 +20,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
 // Redux store
-
+// import { Provider } from 'react-redux'; // מאפשר הגישה לחנות העוטף את האפליקציה
 
 // axios config
 axios.defaults.baseURL = "http://localhost:3007/";
@@ -37,11 +38,13 @@ axios.interceptors.request.use((config) => {
 });
 
 
-
+// Root Render
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
 );
 
