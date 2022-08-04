@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { ToastContainer } from "react-toastify";
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -26,23 +26,24 @@ function App() {
     <div className="App">
       <NavbarComponent/>
       <ToastContainer/>
-      <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/home">
-          <Redirect to="/"/>
-        </Route>
+        <Switch>
+          <Route path="/" exact component={HomePage}/>
+          <Route path="/home" exact>
+            <Redirect to="/" exact/>
+          </Route>
 
-        <Route path="/test" component={HomePage}/>
+          <Route path="/test" component={HomePage}/>
 
-        <Route path="/signup" component={Signup}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/logout" component={Logout}/>
-        <Route path="/my-account" component={MyAccount}/>
-        <Route path="/about" component={About}/>
-        <Route path="/our-rooms" component={OurRooms}/>
-        <Route path="/contact" component={ContactUs}/>
-        <Route path="*" component={PageNotFound}/>
-      </Switch>
+          <Route path="/signup" component={Signup}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/logout" component={Logout}/>
+          <Route path="/my-account" component={MyAccount}/>
+          <Route path="/about" component={About}/>
+          <Route path="/our-rooms" component={OurRooms}/>
+          <Route path="/contact" component={ContactUs}/>
+          <Route path="*" component={PageNotFound}/>
+        </Switch>
+
       {/*
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

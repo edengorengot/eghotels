@@ -85,6 +85,8 @@ const Signup = () => {
         //   } else {
         //     alert("Please write an item between 3 to 20 letters");
         //   }
+
+        console.log("The DATA from the user are:");
         console.log("firstName", inputFirstName);
         console.log("lastName", inputLastName);
         console.log("email", inputEmail);
@@ -110,12 +112,11 @@ const Signup = () => {
         console.log("Validated Values:", validationCheck);
         console.log("Password Checker:", passwordChecker());
 
-        console.log(validationCheck.error);
+        console.log("There are validation errors?", validationCheck.error);
 
         if (validationCheck.error) {
             toast.error("One of the values is incorrect...");
         } else {
-            console.log("here!!!!!!!!!!!!!!!!!!!!!!!!");
             axios.post(
                 '/api/users/signup',
                 {
@@ -129,9 +130,43 @@ const Signup = () => {
                 }
             )
             .then((response) => {
-                console.log("response", response);
+                toast(response.data.message);
+                if (response.data) {
+                    axios.post(
+                        '/api/users/login',
+                        {
+                            email: inputEmail,
+                            password: inputPassword
+                        }
+                    )
+                    .then((response) => {
+                        console.log("login response:", response);
+                        toast(response.data.message);
+                        localStorage.setItem('token', response.data.token);
+                        // dispatch(login());
+                        history.push('/my-account');
+                    })
+                    .catch((err) => {
+                        console.log("err.request", err.request);
+                        if (err.response) {
+                            toast(err.response.data);
+                        } else if (err.request) {
+                            toast("Something went wrong");
+                        } else {
+                            toast("Something went wrong");
+                        }
+                    });
+                };
+            }).catch((err) => {
+                console.log("err.request", err.request);
+                if (err.response) {
+                    toast(err.response.data);
+                } else if (err.request) {
+                    toast("Something went wrong");
+                } else {
+                    toast("Something went wrong");
+                };
             });
-            console.log("here is my test!");
         };
     };
 
