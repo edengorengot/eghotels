@@ -4,8 +4,9 @@ import "./NavbarItemComponent.css"
 const NavbarItemComponent = (props) => {
     return (
         <li className="nav-item">
-            <NavLink className="nav-link" to={`/${props.menuLinksArrProps.replace(" ", "-").toLowerCase()}`} activeClassName="active-link"></NavLink>
-            {/* <NavLink className="nav-link" to={`/${props.menuLinksArrProps.replace(" ", "-").toLocaleLowerCase()}`}></NavLink> */}
+            <NavLink className="nav-link" to={`/${props.menuLinksArrProps.replace(" ", "-").toLocaleLowerCase()}`} activeClassName="active-link">
+                {props.menuLinksArrProps}
+            </NavLink>
         </li>
     )
 };

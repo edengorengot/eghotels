@@ -1,57 +1,26 @@
-// import { NavLink } from "react-router-dom";
-// const menuLinksArr = ["Home", "Test", "Signup", "My Account", "About", "Contact"];
-// import { Link } from "react-router-dom";
+import NavbarItemComponent from "./partial/NavbarItemComponent";
+
+const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Contact"];
 
 const NavbarComponent = () => {
     return (
         <div className="container">
-            <h1>I am the Navbar Component</h1>
-{/* 
-            <Navbar bg="dark" variant="dark"> נווה
-                <Container>
-                    <Nav className="me-auto">
-                        <NavLink eventKey="1" as={Link} to="/">
-                            Home
-                        </NavLink>
-                        <NavLink eventKey="2" as={Link} to="/about">
-                            About
-                        </NavLink>
-                        <NavLink eventKey="3" as={Link} to="/contact">
-                            Contact
-                        </NavLink>
-                    </Nav>
-                </Container>
-            </Navbar> */}
-
-
-
-            
-            {/* <nav className="nav"> שלמה
-                <ul>
-                    <Link></Link>
+            <nav>
+                <ul className="nav">
                     {menuLinksArr.map((item, idx) => {
                         return (
-                            <li className="nav-item" key={idx}>
-                                <NavLink className="nav-link" to={`/${item.replace(" ", "-").toLowerCase()}`}>{item}</NavLink>
-                            </li>
-                        )
-                    })}
+                            <NavbarItemComponent key={idx} menuLinksArrProps={item}/>
+                            )
+                        })}
                     {true ? (
-                        "12345"
-                    ) :(
-                        "54321"
+                        <NavbarItemComponent menuLinksArrProps="Login"/>
+                        ) :(
+                        <NavbarItemComponent menuLinksArrProps="Logout"/>
                     )}
                 </ul>
-            </nav> */}
+            </nav>
         </div>
     );
 };
 
 export default NavbarComponent;
-
-
-
-{/* <Route path="/login" component={Login}/>
-<Route path="/logout" component={Logout}/> */}
-{/* <Route path="/my-account" component={MyAccount}/> */}
-{/* <Route path="/our-rooms" component={OurRooms}/> */}

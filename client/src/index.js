@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 // Router
-// import { BrowserRouter as Router } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Redux store
 // import { Provider } from 'react-redux'; // מאפשר הגישה לחנות העוטף את האפליקציה
@@ -13,9 +12,10 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from "axios";
 
 // add Bootstrap to React
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
-import "bootstrap/dist/css/bootstrap.min.css"
+// import "../node_modules/bootstrap/dist/css/bootstrap.css";
+// import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 // react-toastify
 import "react-toastify/dist/ReactToastify.css";
@@ -44,11 +44,12 @@ axios.interceptors.request.use((config) => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <App />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

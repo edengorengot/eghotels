@@ -10,13 +10,13 @@ import NavbarComponent from './components/NavbarComponent/NavbarComponent';
 
 // pages
 import HomePage from './pages/HomePage';
+import About from './pages/About';
+import MyAccount from './pages/MyAccount';
+import OurRooms from './pages/OurRooms';
+import ContactUs from './pages/ContactUs';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import MyAccount from './pages/MyAccount';
-import About from './pages/About';
-import OurRooms from './pages/OurRooms';
-import ContactUs from './pages/ContactUs';
 import PageNotFound from './pages/PageNotFound';
 
 
@@ -27,20 +27,18 @@ function App() {
       <NavbarComponent/>
       <ToastContainer/>
         <Switch>
-          <Route path="/" exact component={HomePage}/>
-          <Route path="/home" exact>
-            <Redirect to="/" exact/>
+          <Route path="/home" component={HomePage}/>
+          <Route path="/" exact>
+            <Redirect to="/home"/>
           </Route>
 
-          <Route path="/test" component={HomePage}/>
-
+          <Route path="/about" component={About}/>
+          <Route path="/my-account" component={MyAccount}/>
+          <Route path="/our-rooms" component={OurRooms}/>
+          <Route path="/contact" component={ContactUs}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/login" component={Login}/>
           <Route path="/logout" component={Logout}/>
-          <Route path="/my-account" component={MyAccount}/>
-          <Route path="/about" component={About}/>
-          <Route path="/our-rooms" component={OurRooms}/>
-          <Route path="/contact" component={ContactUs}/>
           <Route path="*" component={PageNotFound}/>
         </Switch>
 
