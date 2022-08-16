@@ -40,12 +40,36 @@ const usersSchema = new mongoose.Schema({
         minlength: 8,
         maxlength: 255,
     },
-    profileImg: {
-        type: String,
-        required: false,
-        minlength: 5,
-        maxlength: 255,
+    reservations: [],
+    clubPoints: 0,
+
+    preferences: {
+        accessibleRoom: false,
+        accessibleParking: false,
+        accessibleCar: {
+            brand: "",
+            model: "",
+            color: "",
+            carNumber: ""
+        },
+        twinBeds: false,
+        doubleBed: false,
+        balcony: false,
+        bathtub: false,
+        showerStall: false,
+        DoorToDoor: false,
+        adjoiningRooms: false,
+        interconnectingRooms: false,
+        farFromElevator: false,
+        closeToElevator: false,
+        quietRoom: false,
+        highFloor: false,
+        lowFloor: false,
+        preferredFloor: "",
+        shabbatObservant: false,
+        preferBetterView: false,
     },
+
     createdAt: {
         type: Date,
         default: Date.now,
@@ -67,19 +91,23 @@ const selectUserByEmail = (email) => {
     return Users.find({email});
 };
 
+const selectUserByMobilePhone = (mobilePhone) => {
+    // return Users.find({mobilePhone}).select('-password');
+    return Users.find({mobilePhone});
+};
+
 const selectALLUsers = () => {
     return Users.find({}).select('-password');
 };
 
-const insertNewUser = (firstName, lastName, email, mobilePhone, telephone, password, profileImg) => {
+const insertNewUser = (firstName, lastName, email, mobilePhone, telephone, password) => {
     let user = new Users({
         firstName,
         lastName,
         email,
         mobilePhone,
         telephone,
-        password,
-        profileImg
+        password
     });
     return user.save();
 };
@@ -88,6 +116,7 @@ const deleteUser = (id) => {
     return Users.findOneAndDelete({ _id: id }, (err, deletedUser) => {
         if (err) {
             console.log("Error:", err);
+            // return err;
         } else{
             console.log("Deleted:", deletedUser);
         }
@@ -105,6 +134,7 @@ const updateUserData = (id, newUserData) => {
 module.exports = {
     selectUserByID,
     selectUserByEmail,
+    selectUserByMobilePhone,
     selectALLUsers,
     insertNewUser,
     deleteUser,

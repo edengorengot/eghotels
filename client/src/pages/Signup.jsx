@@ -1,20 +1,19 @@
 import { useState } from "react";
 import Joi from "joi-browser";
-import signupSchema from "../validation/signup.validation";
+import userValidation from "../validation/user.validation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
 
 const Signup = () => {
-    const [inputFirstName, setInputFirstName]  = useState("");
-    const [inputLastName, setInputLastName]  = useState("");
-    const [inputEmail, setInputEmail]  = useState("");
-    const [inputMobilePhone, setInputMobilePhone]  = useState("");
-    const [inputTelephone, setInputTelephone]  = useState("");
-    const [inputPassword, setInputPassword]  = useState("");
-    const [inputPasswordRepeat, setInputPasswordRepeat]  = useState("");
-    const [inputProfileImg, setInputProfileImg]  = useState("");
+    const [inputFirstName, setInputFirstName] = useState("");
+    const [inputLastName, setInputLastName] = useState("");
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputMobilePhone, setInputMobilePhone] = useState("");
+    const [inputTelephone, setInputTelephone] = useState("");
+    const [inputPassword, setInputPassword] = useState("");
+    const [inputPasswordRepeat, setInputPasswordRepeat] = useState("");
 
     const history = useHistory();
 
@@ -53,48 +52,8 @@ const Signup = () => {
         setInputPasswordRepeat(e.target.value);
     };
 
-    const handleInputProfileImgChange = (e) => {
-        // console.log("Profile Image:", e.target.value);
-        setInputProfileImg(e.target.value);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        let passwordChecker = (inputPassword, inputPasswordRepeat) => {
-            if (inputPassword === inputPasswordRepeat) {
-                return true;
-            } else {
-                return false;
-            };
-            
-            // if (inputPassword !== inputPasswordRepeat) {
-            //     console.log("the passwords are not the same...");
-                
-            // }
-        };
-        // if (
-        //     inputText.title.trim() &&
-        //     inputText.title.length >= 3 &&
-        //     inputText.title.length <= 20
-        //   ) {
-        //     props.addTodoProps(inputText.title);
-        //     setInputText({
-        //       title: "",
-        //     });
-        //   } else {
-        //     alert("Please write an item between 3 to 20 letters");
-        //   }
-
-        console.log("The DATA from the user are:");
-        console.log("firstName", inputFirstName);
-        console.log("lastName", inputLastName);
-        console.log("email", inputEmail);
-        console.log("mobilePhone", inputMobilePhone);
-        console.log("telephone", inputTelephone);
-        console.log("password", inputPassword);
-        console.log("passwordRepeat", inputPasswordRepeat);
-        console.log("profileImg", inputProfileImg);
 
         const validationCheck = Joi.validate(
             {
@@ -105,66 +64,79 @@ const Signup = () => {
                 telephone: inputTelephone,
                 password: inputPassword,
                 passwordRepeat: inputPasswordRepeat,
-                profileImg: inputProfileImg,
             },
-            signupSchema
+            userValidation.signupSchema
         );
-        console.log("Validated Values:", validationCheck);
-        console.log("Password Checker:", passwordChecker());
 
-        console.log("There are validation errors?", validationCheck.error);
+        let newUserData = {};
+        /* trim for double validation */
+        let inputFirstNameModified = inputFirstName.trim();
+        let inputLastNameModified = inputLastName.trim();
+        let inputEmailModified = inputEmail.trim();
+        let inputMobilePhoneModified = inputMobilePhone.replace("-", "").trim();
+        let inputTelephoneModified = inputTelephone.replace("-", "").trim();
+        let inputPasswordModified = inputPassword.trim();
+
+
+        if (inputTelephoneModified) {
+            newUserData = {
+                firstName: inputFirstNameModified,
+                lastName: inputLastNameModified,
+                email: inputEmailModified,
+                mobilePhone: inputMobilePhoneModified,
+                telephone: inputTelephoneModified,
+                password: inputPasswordModified,
+            };
+        } else {
+            newUserData = {
+                firstName: inputFirstNameModified,
+                lastName: inputLastNameModified,
+                email: inputEmailModified,
+                mobilePhone: inputMobilePhoneModified,
+                password: inputPasswordModified,
+            };
+        };
+
 
         if (validationCheck.error) {
-            toast.error("One of the values is incorrect...");
+            toast.error(JSON.stringify(validationCheck.error.details[0].message));
         } else {
-            axios.post(
-                '/api/users/signup',
-                {
-                    firstName: inputFirstName,
-                    lastName: inputLastName,
-                    email: inputEmail,
-                    mobilePhone: inputMobilePhone,
-                    telephone: inputTelephone,
-                    password: inputPassword,
-                    profileImg: inputProfileImg,
-                }
-            )
+            toast.success("The DATA sent to the server!");
+            axios.post('/api/users/signup', newUserData)
             .then((response) => {
                 toast(response.data.message);
-                if (response.data) {
-                    axios.post(
-                        '/api/users/login',
-                        {
-                            email: inputEmail,
-                            password: inputPassword
-                        }
-                    )
+
+                if (response.data.message === "New user inserted!") {
+                    axios.post('/api/users/login', { email: inputEmail, password: inputPassword})
                     .then((response) => {
                         console.log("login response:", response);
                         toast(response.data.message);
+
                         localStorage.setItem('token', response.data.token);
                         // dispatch(login());
                         history.push('/my-account');
                     })
+                    /* err login */
                     .catch((err) => {
-                        console.log("err.request", err.request);
                         if (err.response) {
                             toast(err.response.data);
                         } else if (err.request) {
-                            toast("Something went wrong");
+                            console.log("error.request:", err.request);
+                            toast.error("The request had a problem.");
                         } else {
-                            toast("Something went wrong");
+                            toast.error("Something went wrong.");
                         }
                     });
                 };
+            /* err signup */
             }).catch((err) => {
-                console.log("err.request", err.request);
                 if (err.response) {
                     toast(err.response.data);
                 } else if (err.request) {
-                    toast("Something went wrong");
+                    console.log("error.request:", err.request);
+                    toast.error("The request had a problem.");
                 } else {
-                    toast("Something went wrong");
+                    toast.error("Something went wrong.");
                 };
             });
         };
@@ -176,48 +148,66 @@ const Signup = () => {
                 <h1>Signup</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="inputFirstName" className="form-label">First Name</label>
+                        <label htmlFor="inputFirstName" className="form-label">First Name<span>*required</span></label>
                         <input type="text" className="form-control" id="inputFirstName" onChange={handleFirstNameChange} value={inputFirstName} placeholder="First name..."/>
+                        <div id="firstNameHelp" className="form-text">Enter your first name (2-255 characters).</div>
+                
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="inputLastName" className="form-label">Last Name</label>
+                        <label htmlFor="inputLastName" className="form-label">Last Name<span>*required</span></label>
                         <input type="text" className="form-control" id="inputLastName" onChange={handleLastNameChange} value={inputLastName} placeholder="Last name..."/>
+                        <div id="lastNameHelp" className="form-text">Enter your last name (2-255 characters).</div>
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="inputEmail" className="form-label">Email</label>
+                        <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
                         <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
                         <div id="emailHelp" className="form-text">
+                            Enter your email address<br/>
                             We'll never share your email with anyone else.
                         </div>
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="inputMobilePhone" className="form-label">Mobile Phone</label>
+                        <label htmlFor="inputMobilePhone" className="form-label">Mobile Phone<span>*required</span></label>
                         <input type="tel" className="form-control" id="inputMobilePhone" onChange={handleMobilePhoneChange} value={inputMobilePhone} placeholder="0501234567"/>
+                        <div id="mobilePhoneHelp" className="form-text">Enter your phone number.</div>
                     </div>
 
                     <div className="mb-3">
                         <label htmlFor="inputTelephone" className="form-label">Telephone</label>
                         <input type="tel" className="form-control" id="inputTelephone" onChange={handleTelephoneChange} value={inputTelephone} placeholder="031234567"/>
+                        <div id="telephoneHelp" className="form-text">Enter your home or office phone number.</div>
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="inputPassword" className="form-label">Password</label>
+                        <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
                         <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
+                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
                     </div>
 
                     <div className="mb-3">
-                        <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password</label>
+                        <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password<span>*required</span></label>
                         <input type="password" className="form-control" id="inputPasswordRepeat" onChange={handlePasswordRepeatChange} value={inputPasswordRepeat} placeholder="Repeat your password here..."/>
+                        <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
                     </div>
 
-                    <div className="mb-3">
-                        <label htmlFor="inputProfileImg" className="form-label">Profile Image</label>
-                        <input type="url" className="form-control" id="inputProfileImg" onChange={handleInputProfileImgChange} value={inputProfileImg} placeholder="Enter a link to an image..."/>
-                    </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={
+                            !inputFirstName ||
+                            !inputLastName ||
+                            !inputEmail ||
+                            !inputMobilePhone ||
+                            !inputPassword ||
+                            !inputPasswordRepeat ||
+                            !(inputPassword === inputPasswordRepeat)
+                        }
+                    >
+                        Submit
+                    </button>
                 </form>
             </div>
         </>
