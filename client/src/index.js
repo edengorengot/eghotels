@@ -1,12 +1,14 @@
 /* Imports */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// global redux
+import { Provider } from 'react-redux';
 
 // Router
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // Redux store
-// import { Provider } from 'react-redux'; // מאפשר הגישה לחנות העוטף את האפליקציה
+import store from './store/index.redux';
 
 // add Axios to React
 import axios from "axios";
@@ -44,9 +46,11 @@ axios.interceptors.request.use((config) => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
 

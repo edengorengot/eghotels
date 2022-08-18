@@ -2,8 +2,10 @@ import { useState } from "react";
 import Joi from "joi-browser";
 import userValidation from "../validation/user.validation";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { authActions } from "../store/auth.redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 
@@ -12,6 +14,7 @@ const Login = () => {
     const [inputPassword, setInputPassword] = useState("");
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleEmailChange = (e) => {
         // console.log("Email:", e.target.value);
@@ -52,9 +55,9 @@ const Login = () => {
                 toast(response.data.message);
                 if (response.data.message === "You have successfully logged in.") {
                     localStorage.setItem('token', response.data.token);
-                    // dispatch(login());
+                    dispatch(authActions.login());
                     history.push('/my-account');
-                }
+                };
             })
             /* err login */
             .catch((err) => {

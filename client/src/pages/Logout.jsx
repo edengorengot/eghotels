@@ -1,21 +1,24 @@
 import { useHistory } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { authActions } from "../store/auth.redux";
+import { authActions } from "../store/auth.redux";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Logout = () => {
     const history = useHistory();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    localStorage.clear();
-    // dispatch(authActions.logout());
-    history.push("/");
+    (async () => {
+        await localStorage.clear();
+        await dispatch(authActions.logout());
+        await toast.success("You have successfully been logged out.");
+        await history.push("/");
+    })();
     
     return (
         <>
-            <h1>Logout</h1>
+            <h1>Log out</h1>
         </>
     )
-
 };
 
 export default Logout;

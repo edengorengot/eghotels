@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Guard
+import AuthGuardRoute from "./AuthGurad/AuthGuardRoute";
 
 // components
 import NavbarComponent from './components/NavbarComponent/NavbarComponent';
@@ -33,12 +34,12 @@ function App() {
           </Route>
 
           <Route path="/about" component={About}/>
-          <Route path="/my-account" component={MyAccount}/>
+          <AuthGuardRoute path="/my-account" component={MyAccount}/>
           <Route path="/our-rooms" component={OurRooms}/>
           <Route path="/contact" component={ContactUs}/>
           <Route path="/signup" component={Signup}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/logout" component={Logout}/>
+          <Route path="/log-in" component={Login}/>
+          <Route path="/log-out" component={Logout}/>
           <Route path="*" component={PageNotFound}/>
         </Switch>
 

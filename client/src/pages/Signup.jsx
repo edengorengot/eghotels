@@ -2,8 +2,10 @@ import { useState } from "react";
 import Joi from "joi-browser";
 import userValidation from "../validation/user.validation";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { authActions } from "../store/auth.redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const Signup = () => {
@@ -16,6 +18,7 @@ const Signup = () => {
     const [inputPasswordRepeat, setInputPasswordRepeat] = useState("");
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleFirstNameChange = (e) => {
         // console.log("First Name:", e.target.value);
@@ -113,7 +116,7 @@ const Signup = () => {
                         toast(response.data.message);
 
                         localStorage.setItem('token', response.data.token);
-                        // dispatch(login());
+                        dispatch(authActions.login());
                         history.push('/my-account');
                     })
                     /* err login */

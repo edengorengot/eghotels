@@ -1,8 +1,11 @@
 import NavbarItemComponent from "./partial/NavbarItemComponent";
+import { useSelector } from "react-redux";
 
 const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Contact"];
 
 const NavbarComponent = () => {
+    const loggedIn = useSelector((state) => state.auth.loggedIn);
+
     return (
         <div className="container">
             <nav>
@@ -12,10 +15,10 @@ const NavbarComponent = () => {
                             <NavbarItemComponent key={idx} menuLinksArrProps={item}/>
                             )
                         })}
-                    {true ? (
-                        <NavbarItemComponent menuLinksArrProps="Login"/>
+                    {loggedIn ? (
+                        <NavbarItemComponent menuLinksArrProps="Log Out"/>
                         ) :(
-                        <NavbarItemComponent menuLinksArrProps="Logout"/>
+                        <NavbarItemComponent menuLinksArrProps="Log In"/>
                     )}
                 </ul>
             </nav>
