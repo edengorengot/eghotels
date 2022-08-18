@@ -1,5 +1,6 @@
 import { Redirect, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AuthGuardRoute = ({ component: Component, ...rest }) => {
     const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -11,6 +12,7 @@ const AuthGuardRoute = ({ component: Component, ...rest }) => {
                 return loggedIn === true ? (
                     <Component {...props}/>
                 ) : (
+                    toast.error("You have to logged in first."),
                     <Redirect to="/log-in"/>
                 );
             }}
