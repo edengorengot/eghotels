@@ -94,8 +94,9 @@ const Login = () => {
                     </div>
 
                     <button type="submit" className="btn btn-primary" disabled={!inputEmail || !inputPassword}>Submit</button>
-
                 </form>
+                
+                <h4>Reset my password</h4>
             </div>
         </>
     );

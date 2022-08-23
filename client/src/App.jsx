@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import './styles/app.scss';
 import { ToastContainer } from "react-toastify";
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -13,7 +14,16 @@ import NavbarComponent from './components/NavbarComponent/NavbarComponent';
 import HomePage from './pages/HomePage';
 import About from './pages/About';
 import MyAccount from './pages/MyAccount';
-import OurRooms from './pages/OurRooms';
+import AdminDashboard from './pages/AdminDashboard';
+
+import CarmelHome from './pages/CarmelHome';
+import CarmelRooms from './pages/CarmelRooms';
+import CarmelHotelFacilities from './pages/CarmelHotelFacilities';
+
+import TelAvivHome from './pages/TelAvivHome';
+import TelAvivRooms from './pages/TelAvivRooms';
+import TelAvivHotelFacilities from './pages/TelAvivHotelFacilities';
+
 import ContactUs from './pages/ContactUs';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -35,7 +45,16 @@ function App() {
 
           <Route path="/about" component={About}/>
           <AuthGuardRoute path="/my-account" component={MyAccount}/>
-          <Route path="/our-rooms" component={OurRooms}/>
+          <AuthGuardRoute path="/admin-dashboard" component={AdminDashboard}/>
+
+          <Route path="/carmel-home" component={CarmelHome}/>
+          <Route path="/carmel-rooms" component={CarmelRooms}/>
+          <Route path="/carmel-hotel-facilities" component={CarmelHotelFacilities}/>
+
+          <Route path="/tel-aviv-home" component={TelAvivHome}/>
+          <Route path="/tel-aviv-rooms" component={TelAvivRooms}/>
+          <Route path="/tel-aviv-hotel-facilities" component={TelAvivHotelFacilities}/>
+
           <Route path="/contact" component={ContactUs}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/log-in" component={Login}/>

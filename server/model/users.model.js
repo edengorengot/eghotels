@@ -40,6 +40,11 @@ const usersSchema = new mongoose.Schema({
         minlength: 8,
         maxlength: 255,
     },
+    admin: {
+        type: Boolean,
+        default: false,
+    },
+
     reservations: [],
     clubPoints: 0,
 
