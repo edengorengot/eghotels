@@ -13,7 +13,14 @@ const userValidation = {
     loginSchema: {
         email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255).required(),
         password: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255).required(),
-    }
+    },
+    forgotPasswordSchema: {
+        email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255).required(),
+    },
+    resetPasswordSchema: {
+        password: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255).required(),
+        passwordRepeat: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255).required(),
+    },
 };
 
 

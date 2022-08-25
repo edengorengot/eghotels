@@ -27,6 +27,8 @@ import TelAvivHotelFacilities from './pages/TelAvivHotelFacilities';
 import ContactUs from './pages/ContactUs';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Logout from './pages/Logout';
 import PageNotFound from './pages/PageNotFound';
 
@@ -58,6 +60,8 @@ function App() {
           <Route path="/contact" component={ContactUs}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/log-in" component={Login}/>
+          <Route path="/forgot-password" component={ForgotPassword}/>
+          <Route path="/reset-password/:resetPassword/:email" component={ResetPassword}/>
           <Route path="/log-out" component={Logout}/>
           <Route path="*" component={PageNotFound}/>
         </Switch>

@@ -23,8 +23,16 @@ const validateLoginUsersSchema = Joi.object({
     password: Joi.string().required().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255),
 });
 
+const validateForgotPasswordSchema = Joi.object({
+    email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
+});
+
 module.exports = {
     validateUsersSchema,
     validateUpdateUsersSchema,
-    validateLoginUsersSchema
+    validateLoginUsersSchema,
+    validateForgotPasswordSchema
 };
+
+
+// password regex for not a word:       (?=.*[\W])

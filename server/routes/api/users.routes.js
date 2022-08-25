@@ -5,6 +5,7 @@ const userModel = require('../../model/users.model');
 const bcrypt = require('../../config/bcrypt');
 const jwt = require('../../config/jwt');
 const authMiddleware = require('../../middleware/auth.middleware');
+const { sendResetEmail } = require('../../email/sendResetEmail');
 
 
 
@@ -34,6 +35,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
 router.post('/login', async (req, res) => {
   try {
     let validateData = await userValidation.validateLoginUsersSchema.validateAsync(req.body);
@@ -60,6 +62,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+
 router.delete('/deleteuser', authMiddleware, async (req, res) => {
   try {
     let id = req.userData.id;
@@ -81,6 +84,7 @@ router.delete('/deleteuser', authMiddleware, async (req, res) => {
   }
 });
 
+
 router.delete('/deleteall', authMiddleware, async (req, res) => {
   try {
     const deletedUsers = await userModel.deleteAll();
@@ -89,6 +93,7 @@ router.delete('/deleteall', authMiddleware, async (req, res) => {
     res.status(401).json({ message: "Something went wrong.", err });
   }
 });
+
 
 router.get('/userbyid', authMiddleware, async (req, res) => {
   try {
@@ -109,6 +114,7 @@ router.get('/userbyid', authMiddleware, async (req, res) => {
   }
 });
 
+
 router.get('/userbyemail', authMiddleware, async (req, res) => {
   try {
     let email = req.userData.email;
@@ -128,6 +134,7 @@ router.get('/userbyemail', authMiddleware, async (req, res) => {
   }
 });
 
+
 router.get('/allusers', authMiddleware, async (req, res) => {
   try {
     let databaseChecker = await userModel.selectALLUsers();
@@ -136,6 +143,7 @@ router.get('/allusers', authMiddleware, async (req, res) => {
     res.status(401).json({ message: "Something went wrong.", err });
   }
 });
+
 
 router.patch('/update', authMiddleware, async (req, res) => {
   try {
@@ -155,6 +163,79 @@ router.patch('/update', authMiddleware, async (req, res) => {
     let newUserData = await userModel.updateUserData(id, validateData);
 
     res.json({ message: "User was updated successfully." });
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
+  }
+});
+
+
+router.patch('/forgot-password', async (req, res) => {
+  try {
+    let validateData = await userValidation.validateForgotPasswordSchema.validateAsync(req.body);
+    let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
+
+    if (databaseCheckerEmail.length === 1) {
+      let userData = databaseCheckerEmail[0];
+
+      let resetPassword = "";
+      
+      for (let i = 0; i < 2; i++) {
+        let abcId = Math.round(Math.random() * 25);
+        let abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        resetPassword = resetPassword + abc[abcId];
+      };
+      resetPassword = resetPassword.charAt(0).toLocaleUpperCase() + resetPassword.slice(1);
+
+      let randomString = Math.random().toString(36).slice(2, 10);
+
+      let symbolsId = Math.round(Math.random() * 9);
+      let symbols = ["!", "@", "#", "$", "%", "^", "=", "&", "_", "*"];
+
+      resetPassword = resetPassword + randomString + symbols[symbolsId];
+
+      let hashedResetPassword = await bcrypt.createHash(resetPassword);
+      let updatedUserData = await userModel.updateUserData(userData.id, { hashedResetPassword });
+
+      sendResetEmail(validateData.email, resetPassword);
+
+      res.json({message: "An email will be sent to you shortly."});
+    } else {
+      res.json({ message: "There are no user with this email." });
+    }
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
+  }
+});
+
+
+router.patch('/reset-password/:resetPassword/:email', async (req, res) => {
+  try {
+    let resetPassword = req.params.resetPassword;
+    let email = req.params.email;
+    
+    let validateEmail = await userValidation.validateForgotPasswordSchema.validateAsync({ email });
+    let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
+    let validateResetPassword = await userValidation.validateUpdateUsersSchema.validateAsync({ password: resetPassword });
+
+    let databaseCheckerEmail = await userModel.selectUserByEmail(validateEmail.email);
+    
+    
+    if (databaseCheckerEmail.length === 1) {
+      let userData = databaseCheckerEmail[0];
+
+      let passwordChecker = await bcrypt.compareHash(validateResetPassword.password, userData.hashedResetPassword);
+
+      if (passwordChecker) {
+        let hashedPassword = await bcrypt.createHash(validateData.password);
+        let updatedUserData = await userModel.updateUserData(userData.id, { password: hashedPassword });
+
+        res.json({ message: "You have successfully changed your password." });
+      } else {
+        res.json({ message: "The reset password is incorrect." });
+      }
+    } else {
+      res.json({ message: "There are no user with this email." });
+    }
   } catch (err) {
     res.status(401).json({ message: "Something went wrong.", err });
   }

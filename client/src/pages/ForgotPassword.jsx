@@ -1,29 +1,18 @@
+
 import { useState } from "react";
 import Joi from "joi-browser";
 import userValidation from "../validation/user.validation";
 import axios from "axios";
-import { authActions } from "../store/auth.redux";
-import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 
 
-const Login = () => {
+const ForgotPassword = () => {
     const [inputEmail, setInputEmail] = useState("");
-    const [inputPassword, setInputPassword] = useState("");
-
-    const history = useHistory();
-    const dispatch = useDispatch();
 
     const handleEmailChange = (e) => {
         // console.log("Email:", e.target.value);
         setInputEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e) => {
-        // console.log("Password:", e.target.value);
-        setInputPassword(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -32,14 +21,12 @@ const Login = () => {
         const validationCheck = Joi.validate(
             {
                 email: inputEmail,
-                password: inputPassword,
             },
-            userValidation.loginSchema
+            userValidation.forgotPasswordSchema
         );
         
         let userData = {
             email: inputEmail.trim(),
-            password: inputPassword.trim(),
         };
 
         if (validationCheck.error) {
@@ -47,17 +34,12 @@ const Login = () => {
         } else {
             toast.success("The DATA sent to the server!");
 
-            axios.post(
-                '/api/users/login',
+            axios.patch(
+                '/api/users/forgot-password',
                 userData
             )
             .then((response) => {
                 toast(response.data.message);
-                if (response.data.message === "You have successfully logged in.") {
-                    localStorage.setItem('token', response.data.token);
-                    dispatch(authActions.login());
-                    history.push('/my-account');
-                };
             })
             /* err login */
             .catch((err) => {
@@ -76,7 +58,7 @@ const Login = () => {
     return (
         <>
             <div className="container">
-                <h1>Login</h1>
+                <h1>Forgot My Password</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
@@ -87,21 +69,11 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="mb-3">
-                        <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
-                        <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
-                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
-                    </div>
-
-                    <button type="submit" className="btn btn-primary" disabled={!inputEmail || !inputPassword}>Submit</button>
+                    <button type="submit" className="btn btn-primary" disabled={!inputEmail}>Submit</button>
                 </form>
-                
-                <h4>
-                    <Link to={"/forgot-password"}>Forgot password?</Link>
-                </h4>
             </div>
         </>
     );
 };
 
-export default Login;
+export default ForgotPassword;

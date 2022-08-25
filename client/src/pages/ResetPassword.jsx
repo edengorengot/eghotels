@@ -2,28 +2,24 @@ import { useState } from "react";
 import Joi from "joi-browser";
 import userValidation from "../validation/user.validation";
 import axios from "axios";
-import { authActions } from "../store/auth.redux";
-import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
-
-const Login = () => {
-    const [inputEmail, setInputEmail] = useState("");
+const ResetPassword = () => {
     const [inputPassword, setInputPassword] = useState("");
+    const [inputPasswordRepeat, setInputPasswordRepeat] = useState("");
+    const { resetPassword, email } = useParams();
 
     const history = useHistory();
-    const dispatch = useDispatch();
-
-    const handleEmailChange = (e) => {
-        // console.log("Email:", e.target.value);
-        setInputEmail(e.target.value);
-    };
 
     const handlePasswordChange = (e) => {
         // console.log("Password:", e.target.value);
         setInputPassword(e.target.value);
+    };
+
+    const handlePasswordRepeatChange = (e) => {
+        // console.log("Password Repeat:", e.target.value);
+        setInputPasswordRepeat(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -31,14 +27,13 @@ const Login = () => {
 
         const validationCheck = Joi.validate(
             {
-                email: inputEmail,
                 password: inputPassword,
+                passwordRepeat: inputPasswordRepeat
             },
-            userValidation.loginSchema
+            userValidation.resetPasswordSchema
         );
         
         let userData = {
-            email: inputEmail.trim(),
             password: inputPassword.trim(),
         };
 
@@ -47,22 +42,23 @@ const Login = () => {
         } else {
             toast.success("The DATA sent to the server!");
 
-            axios.post(
-                '/api/users/login',
+            axios.patch(
+                "/api/users/reset-password/" + resetPassword + "/" + email,
                 userData
             )
             .then((response) => {
                 toast(response.data.message);
-                if (response.data.message === "You have successfully logged in.") {
-                    localStorage.setItem('token', response.data.token);
-                    dispatch(authActions.login());
-                    history.push('/my-account');
+                // console.log(response.data.message);
+
+                if (response.data.message === "You have successfully changed your password.") {
+                    history.push("/log-in");
                 };
             })
             /* err login */
             .catch((err) => {
                 if (err.response) {
                     toast(err.response.data);
+
                 } else if (err.request) {
                     console.log("error.request:", err.request);
                     toast.error("The request had a problem.");
@@ -76,16 +72,8 @@ const Login = () => {
     return (
         <>
             <div className="container">
-                <h1>Login</h1>
+                <h1>Reset My Password</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
-                        <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
-                        <div id="emailHelp" className="form-text">
-                            Enter your email address<br/>
-                            We'll never share your email with anyone else.
-                        </div>
-                    </div>
 
                     <div className="mb-3">
                         <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
@@ -93,15 +81,27 @@ const Login = () => {
                         <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary" disabled={!inputEmail || !inputPassword}>Submit</button>
+                    <div className="mb-3">
+                        <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password<span>*required</span></label>
+                        <input type="password" className="form-control" id="inputPasswordRepeat" onChange={handlePasswordRepeatChange} value={inputPasswordRepeat} placeholder="Repeat your password here..."/>
+                        <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={
+                            !inputPassword ||
+                            !inputPasswordRepeat ||
+                            !(inputPassword === inputPasswordRepeat)
+                        }
+                    >
+                        Submit
+                    </button>
                 </form>
-                
-                <h4>
-                    <Link to={"/forgot-password"}>Forgot password?</Link>
-                </h4>
             </div>
         </>
-    );
+    )
 };
 
-export default Login;
+export default ResetPassword;

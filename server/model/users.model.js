@@ -44,6 +44,12 @@ const usersSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    hashedResetPassword: {
+        type: String,
+        required: false,
+        minlength: 8,
+        maxlength: 255,
+    },
 
     reservations: [],
     clubPoints: 0,
