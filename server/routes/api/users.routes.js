@@ -50,7 +50,12 @@ router.post('/login', async (req, res) => {
           id: userData._id,
           email: userData.email,
         });
-        res.json({ message: "You have successfully logged in.", token: jwtData });
+
+        if (userData.admin) {
+          res.json({ message: "You have successfully logged in.", token: jwtData, admin: userData.admin });
+        } else {
+          res.json({ message: "You have successfully logged in.", token: jwtData });
+        };
       } else {
         res.json({ message: "Incorrect password." });
       }

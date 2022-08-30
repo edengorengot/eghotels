@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import userValidation from "../validation/user.validation";
 import axios from "axios";
 import { authActions } from "../store/auth.redux";
+import { adminActions } from "../store/admin.redux";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -53,9 +54,15 @@ const Login = () => {
             )
             .then((response) => {
                 toast(response.data.message);
+                console.log(response.data);
                 if (response.data.message === "You have successfully logged in.") {
                     localStorage.setItem('token', response.data.token);
                     dispatch(authActions.login());
+                    
+                    if (response.data.admin === true) {
+                        localStorage.setItem('admin', response.data.admin);
+                        dispatch(adminActions.login());
+                    }
                     history.push('/my-account');
                 };
             })

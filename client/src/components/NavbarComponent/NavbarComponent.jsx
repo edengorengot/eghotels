@@ -13,6 +13,7 @@ const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Con
 
 const NavbarComponent = () => {
     const loggedIn = useSelector((state) => state.auth.loggedIn);
+    const admin = useSelector((state) => state.admin.adminStatus);
 
     return (
         <>
@@ -85,8 +86,7 @@ const NavbarComponent = () => {
                             */}
 
                             <Nav.Link as={Link} to="/my-account">My Account</Nav.Link>
-                            {/* admin */}
-                            {true && <Nav.Link as={Link} to="/admin-dashboard">Admin Dashboard</Nav.Link>}
+                            {admin && <Nav.Link as={Link} to="/admin-dashboard">Admin Dashboard</Nav.Link>}
 
                             <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
                             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>

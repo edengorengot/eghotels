@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Guard
 import AuthGuardRoute from "./AuthGurad/AuthGuardRoute";
+import AdminAuthGuardRoute from './AuthGurad/AdminAuthGuardRoute';
 
 // components
 import NavbarComponent from './components/NavbarComponent/NavbarComponent';
@@ -47,7 +48,7 @@ function App() {
 
           <Route path="/about" component={About}/>
           <AuthGuardRoute path="/my-account" component={MyAccount}/>
-          <AuthGuardRoute path="/admin-dashboard" component={AdminDashboard}/>
+          <AdminAuthGuardRoute path="/admin-dashboard" component={AdminDashboard}/>
 
           <Route path="/carmel-home" component={CarmelHome}/>
           <Route path="/carmel-rooms" component={CarmelRooms}/>
