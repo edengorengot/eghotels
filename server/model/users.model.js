@@ -41,8 +41,10 @@ const usersSchema = new mongoose.Schema({
         maxlength: 255,
     },
     admin: {
-        type: Boolean,
-        default: false,
+        type: Number,
+        min: 0,
+        max: 3,
+        default: 0,
     },
     hashedResetPassword: {
         type: String,
@@ -110,7 +112,10 @@ const selectUserByID = (_id) => {
 };
 
 const selectUserByEmail = (email) => {
-    // return Users.find({email}).select('-password');
+    return Users.find({email}).select('-password');
+};
+
+const selectUserByEmailFull = (email) => {
     return Users.find({email});
 };
 
@@ -139,7 +144,6 @@ const deleteUser = (id) => {
     return Users.findOneAndDelete({ _id: id }, (err, deletedUser) => {
         if (err) {
             console.log("Error:", err);
-            // return err;
         } else{
             console.log("Deleted:", deletedUser);
         }
@@ -157,6 +161,7 @@ const updateUserData = (id, newUserData) => {
 module.exports = {
     selectUserByID,
     selectUserByEmail,
+    selectUserByEmailFull,
     selectUserByMobilePhone,
     selectALLUsers,
     insertNewUser,

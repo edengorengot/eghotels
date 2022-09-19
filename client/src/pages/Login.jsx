@@ -54,7 +54,6 @@ const Login = () => {
             )
             .then((response) => {
                 toast(response.data.message);
-                console.log(response.data);
                 if (response.data.message === "You have successfully logged in.") {
                     localStorage.setItem('token', response.data.token);
                     dispatch(authActions.login());

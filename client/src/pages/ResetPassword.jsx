@@ -32,13 +32,19 @@ const ResetPassword = () => {
             },
             userValidation.resetPasswordSchema
         );
-        
+
         let userData = {
             password: inputPassword.trim(),
         };
 
+        let passwordValidation = userValidation.passwordValidation(userData.password);
+
         if (validationCheck.error) {
             toast.error(JSON.stringify(validationCheck.error.details[0].message));
+            return;
+        } else if (!passwordValidation) {
+            toast.error("The password is not strong enough!");
+            return;
         } else {
             toast.success("The DATA sent to the server!");
 
@@ -48,7 +54,7 @@ const ResetPassword = () => {
             )
             .then((response) => {
                 toast(response.data.message);
-                // console.log(response.data.message);
+                console.log(response.data.message);
 
                 if (response.data.message === "You have successfully changed your password.") {
                     history.push("/log-in");

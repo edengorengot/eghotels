@@ -12,34 +12,42 @@ const { sendResetEmail } = require('../../email/sendResetEmail');
 router.post('/signup', async (req, res) => {
   try {
     let validateData = await userValidation.validateUsersSchema.validateAsync(req.body);
-    let hashedPassword = await bcrypt.createHash(validateData.password);
-    let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
-    let databaseCheckerMobilePhone = await userModel.selectUserByMobilePhone(validateData.mobilePhone);    
 
-    if (databaseCheckerEmail.length === 0 && databaseCheckerMobilePhone.length === 0) {
-      let newUser = await userModel.insertNewUser(
-        validateData.firstName,
-        validateData.lastName,
-        validateData.email,
-        validateData.mobilePhone,
-        validateData.telephone,
-        hashedPassword,
-      );
-      res.json({ message: "New user inserted!" });
+    /* Digits Check */
+    let passwordValidation = await userValidation.passwordVerification(validateData.password);
+
+    if (passwordValidation) {
+      let hashedPassword = await bcrypt.createHash(validateData.password);
+      let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
+      let databaseCheckerMobilePhone = await userModel.selectUserByMobilePhone(validateData.mobilePhone);    
+  
+      if (databaseCheckerEmail.length === 0 && databaseCheckerMobilePhone.length === 0) {
+        let newUser = await userModel.insertNewUser(
+          validateData.firstName,
+          validateData.lastName,
+          validateData.email,
+          validateData.mobilePhone,
+          validateData.telephone,
+          hashedPassword,
+        );
+        res.json({ message: "New user inserted!" });
+      } else {
+        res.json({ message: "You already signed up with your email or phone." });
+      };
     } else {
-      res.json({ message: "You already signed up with your email or phone." });
-    }
+      res.json({ message: "The password is not strong enough!" });
+    };
   }
   catch(err) {
     res.status(401).json({ message: "Something went wrong.", err });
-  }
+  };
 });
 
 
 router.post('/login', async (req, res) => {
   try {
     let validateData = await userValidation.validateLoginUsersSchema.validateAsync(req.body);
-    let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
+    let databaseCheckerEmail = await userModel.selectUserByEmailFull(validateData.email);
 
     if (databaseCheckerEmail.length === 1) {
       let userData = databaseCheckerEmail[0];
@@ -176,8 +184,8 @@ router.patch('/update', authMiddleware, async (req, res) => {
 
 router.patch('/forgot-password', async (req, res) => {
   try {
-    let validateData = await userValidation.validateForgotPasswordSchema.validateAsync(req.body);
-    let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
+    let validateData = await userValidation.validateResetPasswordSchema.validateAsync(req.body);
+    let databaseCheckerEmail = await userModel.selectUserByEmailFull(validateData.email);
 
     if (databaseCheckerEmail.length === 1) {
       let userData = databaseCheckerEmail[0];
@@ -191,12 +199,13 @@ router.patch('/forgot-password', async (req, res) => {
       };
       resetPassword = resetPassword.charAt(0).toLocaleUpperCase() + resetPassword.slice(1);
 
-      let randomString = Math.random().toString(36).slice(2, 10);
+      let randomString = Math.round(Math.random() * 1000000);
 
-      let symbolsId = Math.round(Math.random() * 9);
-      let symbols = ["!", "@", "#", "$", "%", "^", "=", "&", "_", "*"];
+      let symbolsId = Math.round(Math.random() * 7);
+      let symbols = ["!", "@", "$", "^", "=", "&", "_", "*"];
 
       resetPassword = resetPassword + randomString + symbols[symbolsId];
+
 
       let hashedResetPassword = await bcrypt.createHash(resetPassword);
       let updatedUserData = await userModel.updateUserData(userData.id, { hashedResetPassword });
@@ -218,29 +227,34 @@ router.patch('/reset-password/:resetPassword/:email', async (req, res) => {
     let resetPassword = req.params.resetPassword;
     let email = req.params.email;
     
-    let validateEmail = await userValidation.validateForgotPasswordSchema.validateAsync({ email });
-    let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
+    let validateEmail = await userValidation.validateResetPasswordSchema.validateAsync({ email });
     let validateResetPassword = await userValidation.validateUpdateUsersSchema.validateAsync({ password: resetPassword });
 
-    let databaseCheckerEmail = await userModel.selectUserByEmail(validateEmail.email);
-    
-    
-    if (databaseCheckerEmail.length === 1) {
-      let userData = databaseCheckerEmail[0];
+    let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
+    let passwordValidation = await userValidation.passwordVerification(validateData.password);
 
-      let passwordChecker = await bcrypt.compareHash(validateResetPassword.password, userData.hashedResetPassword);
+    if (passwordValidation) {
+      let databaseCheckerEmail = await userModel.selectUserByEmailFull(validateEmail.email);
 
-      if (passwordChecker) {
-        let hashedPassword = await bcrypt.createHash(validateData.password);
-        let updatedUserData = await userModel.updateUserData(userData.id, { password: hashedPassword });
-
-        res.json({ message: "You have successfully changed your password." });
+      if (databaseCheckerEmail.length === 1) {
+        let userData = databaseCheckerEmail[0];
+  
+        let passwordChecker = await bcrypt.compareHash(validateResetPassword.password, userData.hashedResetPassword);
+  
+        if (passwordChecker) {
+          let hashedPassword = await bcrypt.createHash(validateData.password);
+          let updatedUserData = await userModel.updateUserData(userData.id, { password: hashedPassword });
+  
+          res.json({ message: "You have successfully changed your password." });
+        } else {
+          res.json({ message: "The reset password is incorrect." });
+        }
       } else {
-        res.json({ message: "The reset password is incorrect." });
+        res.json({ message: "There are no user with this email." });
       }
     } else {
-      res.json({ message: "There are no user with this email." });
-    }
+      res.json({ message: "The password is not strong enough!" });
+    };
   } catch (err) {
     res.status(401).json({ message: "Something went wrong.", err });
   }

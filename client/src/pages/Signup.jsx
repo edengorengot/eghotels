@@ -72,9 +72,11 @@ const Signup = () => {
         );
 
         let newUserData = {};
-        /* trim for double validation */
+        /* String changes for double validation */
         let inputFirstNameModified = inputFirstName.trim();
+        inputFirstNameModified = userValidation.namePipe(inputFirstNameModified);
         let inputLastNameModified = inputLastName.trim();
+        inputLastNameModified = userValidation.namePipe(inputLastNameModified);
         let inputEmailModified = inputEmail.trim();
         let inputMobilePhoneModified = inputMobilePhone.replace("-", "").trim();
         let inputTelephoneModified = inputTelephone.replace("-", "").trim();
@@ -100,9 +102,12 @@ const Signup = () => {
             };
         };
 
+        let passwordValidation = userValidation.passwordValidation(newUserData.password);
 
         if (validationCheck.error) {
             toast.error(JSON.stringify(validationCheck.error.details[0].message));
+        } else if (!passwordValidation) {
+            toast.error("The password is not strong enough!");
         } else {
             toast.success("The DATA sent to the server!");
             axios.post('/api/users/signup', newUserData)
@@ -154,7 +159,6 @@ const Signup = () => {
                         <label htmlFor="inputFirstName" className="form-label">First Name<span>*required</span></label>
                         <input type="text" className="form-control" id="inputFirstName" onChange={handleFirstNameChange} value={inputFirstName} placeholder="First name..."/>
                         <div id="firstNameHelp" className="form-text">Enter your first name (2-255 characters).</div>
-                
                     </div>
 
                     <div className="mb-3">
@@ -187,13 +191,13 @@ const Signup = () => {
                     <div className="mb-3">
                         <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
                         <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
-                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character  and a symbol (! @ # $ % ^ - & _ *) plus at least 4 numbers.</div>
                     </div>
 
                     <div className="mb-3">
                         <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password<span>*required</span></label>
                         <input type="password" className="form-control" id="inputPasswordRepeat" onChange={handlePasswordRepeatChange} value={inputPasswordRepeat} placeholder="Repeat your password here..."/>
-                        <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                        <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character  and a symbol (! @ # $ % ^ - & _ *) plus at least 4 numbers.</div>
                     </div>
 
                     <button

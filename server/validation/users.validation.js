@@ -9,6 +9,28 @@ const validateUsersSchema = Joi.object({
     password: Joi.string().required().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255),
 });
 
+const passwordVerification = (password) => {
+    let innerPassword = password;
+    let numberOfDigits = 0;
+
+    for (let i = 0; i < innerPassword.length; i++) {
+        if (!isNaN(innerPassword[i])) {
+            numberOfDigits = numberOfDigits + 1;
+        };
+    };
+
+    if (numberOfDigits >= 4) {
+        return true;
+    } else {
+        return false;
+    };
+};
+
+const validateLoginUsersSchema = Joi.object({
+    email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
+    password: Joi.string().required().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255),
+});
+
 const validateUpdateUsersSchema = Joi.object({
     firstName: Joi.string().alphanum().min(2).max(255),
     lastName: Joi.string().alphanum().min(2).max(255),
@@ -18,21 +40,14 @@ const validateUpdateUsersSchema = Joi.object({
     password: Joi.string().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255)
 });
 
-const validateLoginUsersSchema = Joi.object({
-    email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
-    password: Joi.string().required().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255),
-});
-
-const validateForgotPasswordSchema = Joi.object({
+const validateResetPasswordSchema = Joi.object({
     email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
 });
 
 module.exports = {
     validateUsersSchema,
-    validateUpdateUsersSchema,
+    passwordVerification,
     validateLoginUsersSchema,
-    validateForgotPasswordSchema
+    validateUpdateUsersSchema,
+    validateResetPasswordSchema
 };
-
-
-// password regex for not a word:       (?=.*[\W])
