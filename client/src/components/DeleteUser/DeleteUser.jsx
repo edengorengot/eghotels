@@ -14,7 +14,7 @@ const DeleteUser = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     const handleAgreeChange = (e) => {
         setAgree(e.target.checked);
@@ -28,7 +28,7 @@ const DeleteUser = () => {
 
             console.log(token);
 
-            axios.delete('/api/users/deleteuser', {headers: {token} })
+            axios.delete('/api/users/deleteuser', { headers: {token} })
 
             .then((response) => {
                 toast(response.data.message);
