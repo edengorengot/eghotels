@@ -117,7 +117,6 @@ const Signup = () => {
                 if (response.data.message === "New user inserted!") {
                     axios.post('/api/users/login', { email: inputEmail, password: inputPassword})
                     .then((response) => {
-                        console.log("login response:", response);
                         toast(response.data.message);
 
                         localStorage.setItem('token', response.data.token);

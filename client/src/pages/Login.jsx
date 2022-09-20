@@ -58,9 +58,20 @@ const Login = () => {
                     localStorage.setItem('token', response.data.token);
                     dispatch(authActions.login());
                     
-                    if (response.data.admin === true) {
+                    if (response.data.admin) {
                         localStorage.setItem('admin', response.data.admin);
-                        dispatch(adminActions.login());
+
+                        if (response.data.admin === 1) {
+                            dispatch(adminActions.loginAdminWorker());
+                        } else if (response.data.admin === 2) {
+                            dispatch(adminActions.loginAdmin());
+                        } else if (response.data.admin === 3) {
+                            dispatch(adminActions.loginOwner());
+                        } else {
+                            console.log("There is an error with the admin login option.");
+                        }
+
+                        dispatch(adminActions.loginOwner());
                     }
                     history.push('/my-account');
                 };

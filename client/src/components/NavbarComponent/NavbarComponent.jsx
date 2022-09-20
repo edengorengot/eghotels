@@ -1,4 +1,4 @@
-import NavbarItemComponent from "./partial/NavbarItemComponent";
+// import NavbarItemComponent from "./partial/NavbarItemComponent";
 import { useSelector } from "react-redux";
 import logo from '../../logo.svg';
 
@@ -7,9 +7,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Contact"];
+// const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Contact"];
 
 const NavbarComponent = () => {
     const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -86,7 +86,7 @@ const NavbarComponent = () => {
                             */}
 
                             <Nav.Link as={Link} to="/my-account">My Account</Nav.Link>
-                            {admin && <Nav.Link as={Link} to="/admin-dashboard">Admin Dashboard</Nav.Link>}
+                            {(admin === "Owner" || admin === "Admin" || admin === "AdminWorker") && <Nav.Link as={Link} to="/admin-dashboard">Admin Dashboard</Nav.Link>}
 
                             <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
                             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>

@@ -8,36 +8,35 @@ import DeleteUser from '../components/DeleteUser/DeleteUser';
 import { toast } from 'react-toastify';
 
 const MyAccount = () => {
-    // const [email] = useState(props.location.state.toLocaleLowerCase());
     const token = localStorage.getItem("token");
-    // let [user] = useState({});
+    let [user] = useState({});
 
     // (async () => {
-    //     if (email) {
-    //         toast.success("The DATA sent to the server!");
-    //         axios.get('/api/users/userbyemail')
-
-    //         .then((response) => {
-    //             user = {
-    //                 id: response.data._id,
-    //                 firstName: response.data.firstName,
-    //                 lastName: response.data.lastName,
-    //                 email: response.data.email,
-    //                 mobilePhone: response.data.mobilePhone,
-    //                 telephone: response.data.telephone,
-    //                 clubPoints: response.data.clubPoints,
-    //                 preferences: response.data.preferences,
-    //                 reservations: response.data.reservations,
-    //                 registered: response.data.createdAt,
-    //             };
-    //             toast(response.data.message);
-    //         })
-    //         .then(() => {
-    //             console.log("work");
-    //         });
-    //     } else {
-    //         await toast.error("There was an error with the data retrieval");
-    //     };
+    //     toast.success("The DATA sent to the server!");
+    //     console.log("here1");
+    //     axios.get('/api/users/userbyid', { headers: {token} })
+    //     .then((response) => {
+    //         console.log("here2");
+    //         console.log("res:", response);
+    //         user = {
+    //             id: response.data._id,
+    //             firstName: response.data.firstName,
+    //             lastName: response.data.lastName,
+    //             email: response.data.email,
+    //             mobilePhone: response.data.mobilePhone,
+    //             telephone: response.data.telephone,
+    //             clubPoints: response.data.clubPoints,
+    //             preferences: response.data.preferences,
+    //             reservations: response.data.reservations,
+    //             registered: response.data.createdAt,
+    //         };
+    //         console.log(user);
+    //         // toast(response.data.message);
+    //     })
+    //     .catch((err) => {
+    //         console.log("errors:", err);
+    //         toast.error("There was an error with the data retrieval");
+    //     });
     // })();
 
     const [key, setKey] = useState('home');

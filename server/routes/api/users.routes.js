@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
           email: userData.email,
         });
 
-        if (userData.admin) {
+        if (userData.admin > 0) {
           res.json({ message: "You have successfully logged in.", token: jwtData, admin: userData.admin });
         } else {
           res.json({ message: "You have successfully logged in.", token: jwtData });

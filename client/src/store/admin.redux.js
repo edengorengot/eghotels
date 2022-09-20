@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialAdminState = {
-    adminStatus: false,
+    adminStatus: "",
 };
 
 
@@ -10,11 +10,17 @@ const adminSlice = createSlice({
     initialState: initialAdminState,
 
     reducers: {
-        login(state) {
-            state.adminStatus = true;
+        loginOwner(state) {
+            state.adminStatus = "Owner";
+        },
+        loginAdmin(state) {
+            state.adminStatus = "Admin";
+        },
+        loginAdminWorker(state) {
+            state.adminStatus = "AdminWorker";
         },
         logout(state) {
-            state.adminStatus = false;
+            state.adminStatus = "";
         },
     },
 });
