@@ -1,5 +1,3 @@
-import "./SpinnerComponent.scss";
-
 const SpinnerComponent = () => {
     return (
         <div className="spinner-border spinner-border-setup" role="status">

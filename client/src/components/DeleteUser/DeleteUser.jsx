@@ -8,13 +8,13 @@ import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const DeleteUser = () => {
+const DeleteUser = (props) => {
+    const token = props.token;
     const [agree, setAgree] = useState(false);
 
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const token = localStorage.getItem("token");
 
     const handleAgreeChange = (e) => {
         setAgree(e.target.checked);
@@ -26,20 +26,17 @@ const DeleteUser = () => {
         if (agree) {
             toast.success("The request sent to the server!");
 
-            console.log(token);
-
             axios.delete('/api/users/deleteuser', { headers: {token} })
-
             .then((response) => {
-                toast(response.data.message);
                 if (response.data.message === "User deleted successfully.") {
                     dispatch(authActions.logout());
                     localStorage.clear();
                     toast.success("You have successfully deleted your account.");
                     history.push('/');
+                } else {
+                    toast(response.data.message);
                 };
             })
-
             .catch((err) => {
                 if (err.response) {
                     toast(err.response.data);

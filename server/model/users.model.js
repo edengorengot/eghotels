@@ -42,6 +42,7 @@ const usersSchema = new mongoose.Schema({
     },
     admin: {
         type: Number,
+        required: false,
         min: 0,
         max: 3,
         default: 0,
@@ -54,6 +55,11 @@ const usersSchema = new mongoose.Schema({
     },
 
     reservations: {
+        type: Array,
+        required: false,
+        default: [],
+    },
+    favoriteHotels: {
         type: Array,
         required: false,
         default: [],
@@ -120,8 +126,7 @@ const selectUserByEmailFull = (email) => {
 };
 
 const selectUserByMobilePhone = (mobilePhone) => {
-    // return Users.find({mobilePhone}).select('-password');
-    return Users.find({mobilePhone});
+    return Users.find({mobilePhone}).select('-password');
 };
 
 const selectALLUsers = () => {

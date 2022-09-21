@@ -120,7 +120,7 @@ router.get('/userbyid', authMiddleware, async (req, res) => {
     if (databaseCheckerId.length === 0) {
       res.json({ message: "User does not exists."});
     } else {
-      res.json(databaseCheckerId);
+      res.json({ message: "User's data sent successfully", databaseCheckerId });
     }
   } catch (err) {
     res.status(401).json({ message: "User does not exists.", err });

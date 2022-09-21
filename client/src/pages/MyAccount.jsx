@@ -1,46 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import axios from 'axios';
+import SpinnerComponent from '../components/SpinnerComponent/SpinnerComponent';
 import UpdateUser from '../components/UpdateUser/UpdateUser';
 import DeleteUser from '../components/DeleteUser/DeleteUser';
 import { toast } from 'react-toastify';
 
 const MyAccount = () => {
     const token = localStorage.getItem("token");
-    let [user] = useState({});
+    const [showSpinnerUserData, setShowSpinnerUserData] = useState(false);
+    const [user, setUser] = useState({});
 
-    // (async () => {
-    //     toast.success("The DATA sent to the server!");
-    //     console.log("here1");
-    //     axios.get('/api/users/userbyid', { headers: {token} })
-    //     .then((response) => {
-    //         console.log("here2");
-    //         console.log("res:", response);
-    //         user = {
-    //             id: response.data._id,
-    //             firstName: response.data.firstName,
-    //             lastName: response.data.lastName,
-    //             email: response.data.email,
-    //             mobilePhone: response.data.mobilePhone,
-    //             telephone: response.data.telephone,
-    //             clubPoints: response.data.clubPoints,
-    //             preferences: response.data.preferences,
-    //             reservations: response.data.reservations,
-    //             registered: response.data.createdAt,
-    //         };
-    //         console.log(user);
-    //         // toast(response.data.message);
-    //     })
-    //     .catch((err) => {
-    //         console.log("errors:", err);
-    //         toast.error("There was an error with the data retrieval");
-    //     });
-    // })();
+    useEffect(() => {
+        setShowSpinnerUserData(false);
+    }, [user]);
+
+    useEffect(() => {
+        setShowSpinnerUserData(true);
+        axios.get('/api/users/userbyid', { headers: {token} })
+        .then((response) => {
+            if (response.data.message === "User's data sent successfully") {
+                setUser({
+                    id: response.data.databaseCheckerId._id,
+                    firstName: response.data.databaseCheckerId.firstName,
+                    lastName: response.data.databaseCheckerId.lastName,
+                    email: response.data.databaseCheckerId.email,
+                    mobilePhone: response.data.databaseCheckerId.mobilePhone,
+                    telephone: response.data.databaseCheckerId.telephone,
+                    registered: response.data.databaseCheckerId.createdAt,
+        
+                    favoriteHotels: response.data.databaseCheckerId.favoriteHotels,
+                    reservations: response.data.databaseCheckerId.reservations,
+                    clubPoints: response.data.databaseCheckerId.clubPoints,
+                    preferences: response.data.databaseCheckerId.preferences,
+                });
+    
+                toast.success(response.data.message);
+            } else {
+                toast(response.data.message);
+                console.log(response.data.message);
+            };
+        })
+        .catch((err) => {
+            console.log("errors:", err);
+            toast.error("There was an error with the data retrieval");
+        });
+      }, [token]);
 
     const [key, setKey] = useState('home');
-    const myData = "Get my data with token or something else...";
 
     return (
         <>
@@ -53,37 +62,54 @@ const MyAccount = () => {
                 fill
             >
                 <Tab eventKey="home" title="Home">
-                    <h2>my favorite hotels</h2>
-                    <h2>{myData}</h2>
-                    <h2>My Active Reservations</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                    <div className="container">
+                        {showSpinnerUserData && <SpinnerComponent/>}
+
+                        {
+                            showSpinnerUserData === false &&
+                            <>
+                                <p>Welcome {user.firstName} {user.lastName}.</p>
+                                <p>You have {user.clubPoints} club points right now.</p>
+                                <p>Club member since: {user.registered}</p>
+
+                                <h2>My Active Reservations</h2>
+                                <h2>My Favorite Hotels</h2>
+                            </>
+                        }
+                    </div>
                 </Tab>
 
                 <Tab eventKey="reservations" title="Reservations">
-                    <h2>My Reservations</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                    <div className="container">
+                        <h2>My Reservations</h2>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                    </div>
                 </Tab>
 
                 <Tab eventKey="profile" title="My Profile">
-                    <h2>My Profile</h2>
-                    <UpdateUser/>
+                    <div className="container">
+                        <h2>My Profile</h2>
+                        <UpdateUser token={token} user={user}/>
+                    </div>
                 </Tab>
 
                 <Tab eventKey="contact" title="Contact">
-                    <h2>Contact Us</h2>
-                    <h5>Open Socket</h5>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                    <div className="container">
+                        <h2>Contact Us</h2>
+                        <h5>Open Socket</h5>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                    </div>
                 </Tab>
 
                 <Tab eventKey="settings" title="Settings">
-                    <h2>My Settings</h2>
-                    <DeleteUser/>
+                    <div className="container">
+                        <h2>My Settings</h2>
+                        <DeleteUser token={token}/>
+                    </div>
                 </Tab>
             </Tabs>
         </>
