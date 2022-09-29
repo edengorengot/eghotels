@@ -168,6 +168,8 @@ router.patch('/update', authMiddleware, async (req, res) => {
 
     let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
 
+    // if password userValidation password check
+
     if (validateData.password) {
       hashedPassword = await bcrypt.createHash(validateData.password);
       validateData.password = hashedPassword;

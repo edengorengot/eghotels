@@ -73,7 +73,9 @@ const MyAccount = () => {
                                 <p>Club member since: {user.registered}</p>
 
                                 <h2>My Active Reservations</h2>
+                                <h1>On Constructions</h1>
                                 <h2>My Favorite Hotels</h2>
+                                <h1>On Constructions</h1>
                             </>
                         }
                     </div>
@@ -82,9 +84,7 @@ const MyAccount = () => {
                 <Tab eventKey="reservations" title="Reservations">
                     <div className="container">
                         <h2>My Reservations</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <h1>On Constructions</h1>
                     </div>
                 </Tab>
 
@@ -99,9 +99,7 @@ const MyAccount = () => {
                     <div className="container">
                         <h2>Contact Us</h2>
                         <h5>Open Socket</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quibusdam, qui temporibus quo nobis, expedita dolorum consequuntur sapiente architecto, quaerat corporis. Autem at dicta molestias voluptatibus sint atque voluptate illo!</p>
+                        <h1>On Constructions</h1>
                     </div>
                 </Tab>
 

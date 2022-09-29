@@ -1,14 +1,17 @@
-import { useState } from 'react';
-// import Joi from "joi-browser";
-// import userValidation from '../../validation/user.validation';
-// import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Joi from "joi-browser";
+import userValidation from '../../validation/user.validation';
+import axios from 'axios';
 import { toast } from "react-toastify";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import SpinnerComponent from '../SpinnerComponent/SpinnerComponent';
 
 const UpdateUser = (props) => {
     const user = props.user;
+    const token = props.token;
+    const [showSpinnerUserData, setShowSpinnerUserData] = useState(false);
     const [inputFirstName, setInputFirstName] = useState("");
     const [inputLastName, setInputLastName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
@@ -65,51 +68,67 @@ const UpdateUser = (props) => {
             passwordRepeat: inputPasswordRepeat,
         };
 
-        const filledUserData = {};
+        userDataForm.firstName = userDataForm.firstName.trim();
+        userDataForm.firstName = userValidation.namePipe(userDataForm.firstName);
+        userDataForm.lastName = userDataForm.lastName.trim();
+        userDataForm.lastName = userValidation.namePipe(userDataForm.lastName);
+        userDataForm.email = userDataForm.email.trim();
+        userDataForm.mobilePhone = userDataForm.mobilePhone.replace("-", "").trim();
+        userDataForm.telephone = userDataForm.telephone.replace("-", "").trim();
+        userDataForm.password = userDataForm.password.trim();
+        userDataForm.passwordRepeat = userDataForm.passwordRepeat.trim();
 
-        // console.log("userDataForm:", userDataForm);
+        const filledUserData = {};
         
         for (const key in userDataForm) {
             if (userDataForm[key] !== "") {
-                // console.log(key, userDataForm[key]);
                 filledUserData[key] = userDataForm[key];
             }
         };
         
-        console.log("filledUserData:", filledUserData);
+        const validationCheck = Joi.validate(filledUserData, userValidation.updateSchema);
+        let passwordValidation = userValidation.passwordValidation(userDataForm.password);
 
-        // const validationCheck = Joi.validate();
+        if (userDataForm.password) {
+            if (!passwordValidation) {
+                toast.error("The password is not strong enough!");
+                return;
+            }
+        }
 
-//         if (agree) {
-//             toast.success("The request sent to the server!");
+        if (filledUserData.passwordRepeat) {
+            delete filledUserData.passwordRepeat;
+        }
 
-//             console.log(token);
+        if (validationCheck.error) {
+            toast.error(JSON.stringify(validationCheck.error.details[0].message));
+        } else {
+            toast.success("The request sent to the server!");
 
-//             axios.delete('/api/users/deleteuser', {headers: {token} })
-
-//             .then((response) => {
-//                 toast(response.data.message);
-//                 if (response.data.message === "User deleted successfully.") {
-//                     dispatch(authActions.logout());
-//                     localStorage.clear();
-//                     toast.success("You have successfully deleted your account.");
-//                     history.push('/');
-//                 };
-//             })
-
-//             .catch((err) => {
-//                 if (err.response) {
-//                     toast(err.response.data);
-//                 } else if (err.request) {
-//                     console.log("error.request:", err.request);
-//                     toast.error("The request had a problem.");
-//                 } else {
-//                     toast.error("Something went wrong.");
-//                 }
-//             });
-//         } else {
-//             alert("Something went wrong. contact us if you want to delete your account.");
-//         };
+            setShowSpinnerUserData(true);
+            axios.patch('/api/users/update',filledUserData, { headers: {token} })
+            .then((response) => {
+                toast(response.data.message);
+                if (response.data.message === "User was updated successfully.") {
+                    for (const key in filledUserData) {
+                        if (key !== "password") {
+                            user[key] = filledUserData[key];
+                        };
+                    };
+                    setShowSpinnerUserData(false);
+                };
+            })
+            .catch((err) => {
+                if (err.response) {
+                    toast(err.response.data);
+                } else if (err.request) {
+                    console.log("error.request:", err.request);
+                    toast.error("The request had a problem.");
+                } else {
+                    toast.error("Something went wrong.");
+                };
+            });
+        };
     };
 
     return (
@@ -117,13 +136,19 @@ const UpdateUser = (props) => {
             <h3>Update My User</h3>
 
             <div>
-                <h4>My Current Information</h4>
-                <p>First Name: {user.firstName}</p>
-                <p>Last Name: {user.lastName}</p>
-                <p>Email: {user.email}</p>
-                <p>Mobile Phone: {user.mobilePhone}</p>
-                <p>Telephone: {user.telephone}</p>
-                <p>Registered: {user.registered}</p>
+                {showSpinnerUserData && <SpinnerComponent/>}
+
+                {
+                    showSpinnerUserData === false &&
+                    <>
+                        <h4>My Current Information</h4>
+                        <p>First Name: {user.firstName}</p>
+                        <p>Last Name: {user.lastName}</p>
+                        <p>Email: {user.email}</p>
+                        <p>Mobile Phone: {user.mobilePhone}</p>
+                        <p>Telephone: {user.telephone}</p>
+                    </>
+                }
             </div>
 
             <hr/>

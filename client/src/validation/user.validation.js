@@ -35,12 +35,18 @@ const userValidation = {
         password: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255).required(),
     },
     updateSchema: {
-    //     firstName: Joi.string().alphanum().min(2).max(255),
-    //     lastName: Joi.string().alphanum().min(2).max(255),
-    //     email: Joi.string().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
-    //     mobilePhone: Joi.string().pattern(new RegExp("^(05+[012345689]{1})+(\\d{7})$")).min(10).max(10),
-    //     telephone: Joi.string().pattern(new RegExp("^(0+[23489]{1})+(\\d{7})$")).min(9).max(9),
-    //     password: Joi.string().pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[\\d])(?=.*[!@#$%^\\-&_*])([A-Za-z\\d!@#$%^\\-&_*]{8,255})$")).min(8).max(255)
+        firstName: Joi.string().alphanum().min(2).max(255),
+        lastName: Joi.string().alphanum().min(2).max(255),
+        email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255),
+        mobilePhone: Joi.string().regex(/^(05+[012345689]{1})+(-?)+(\d{7})$/).min(10).max(11),
+        telephone: Joi.string().regex(/^(0+[23489]{1})+(-?)+(\d{7})$/).min(9).max(10).allow(''),
+        password: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255),
+        passwordRepeat: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255),
+        // admin: Joi.isNumber().min(0).max(3),
+        // favoriteHotels
+        // reservations:
+        // clubPoints
+        // preferences: Joi.object().optional()
     },
     forgotPasswordSchema: {
         email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255).required(),

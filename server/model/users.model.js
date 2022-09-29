@@ -54,12 +54,12 @@ const usersSchema = new mongoose.Schema({
         maxlength: 255,
     },
 
-    reservations: {
+    favoriteHotels: {
         type: Array,
         required: false,
         default: [],
     },
-    favoriteHotels: {
+    reservations: {
         type: Array,
         required: false,
         default: [],
