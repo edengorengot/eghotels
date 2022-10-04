@@ -5,7 +5,7 @@ import logo from '../../logo.svg';
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
+// import { FaYoutube } from "react-icons/fa";
 
 /* Bootstrap imports */
 import Container from 'react-bootstrap/Container';
