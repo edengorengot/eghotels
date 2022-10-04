@@ -10,7 +10,7 @@ const AdminAuthGuardRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={(props) => {
-                return loggedIn === true && admin === true ? (
+                return loggedIn === true && (admin === "Owner" || admin === "Admin" || admin === "AdminWorker") ? (
                     <Component {...props}/>
                 ) : (
                     toast.error("You have to logged in first and be an admin."),

@@ -8,6 +8,7 @@ import AdminAuthGuardRoute from './AuthGurad/AdminAuthGuardRoute';
 
 // components
 import NavbarComponent from './components/NavbarComponent/NavbarComponent';
+import FooterComponent from './components/FooterComponent/FooterComponent';
 
 // pages
 import HomePage from './pages/HomePage';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/log-out" component={Logout}/>
           <Route path="*" component={PageNotFound}/>
         </Switch>
+        <FooterComponent/>
     </div>
   );
 }

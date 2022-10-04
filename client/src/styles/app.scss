@@ -1,6 +1,11 @@
+/* Global */
 @import './partial/variables';
 
 /* Components */
 @import '../components/SpinnerComponent/SpinnerComponent';
 
+/* Pages */
+@import './partial/pages/home';
+
+/* Main */
 @import './partial/style';

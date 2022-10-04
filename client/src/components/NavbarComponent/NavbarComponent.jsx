@@ -1,4 +1,3 @@
-// import NavbarItemComponent from "./partial/NavbarItemComponent";
 import { useSelector } from "react-redux";
 import logo from '../../logo.svg';
 
@@ -9,7 +8,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
 
-// const menuLinksArr = ["Home", "About", "My Account", "Our Rooms", "Signup", "Contact"];
 
 const NavbarComponent = () => {
     const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -17,34 +15,17 @@ const NavbarComponent = () => {
 
     return (
         <>
-            {/* <div className="container">
-                <nav>
-                    <ul className="nav">
-                        {menuLinksArr.map((item, idx) => {
-                            return (
-                                <NavbarItemComponent key={idx} menuLinksArrProps={item}/>
-                            )
-                            })}
-                            {loggedIn ? (
-                                <NavbarItemComponent menuLinksArrProps="Log Out"/>
-                            ) : (
-                                <NavbarItemComponent menuLinksArrProps="Log In"/>
-                        )}
-                    </ul>
-                </nav>
-            </div> */}
-
             <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
                 <Container>
                     <Navbar.Brand as={Link} to="/home">
                     <img
                         alt=""
                         src={logo}
-                        width="30"
-                        height="30"
+                        width="40"
+                        height="40"
                         className="d-inline-block align-top"
                         />{' '}
-                        EG Hotels
+                        <h1>EG Hotels</h1>
                     </Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -96,30 +77,10 @@ const NavbarComponent = () => {
                                 ) : (
                                 <Nav.Link as={Link} to="/log-in">Log In</Nav.Link>
                             )}
-                            
                         </Nav>
-
                     </Navbar.Collapse>
-
                 </Container>
             </Navbar>
-
-            {/* <div className="container">
-                <nav>
-                    <ul className="nav">
-                        {menuLinksArr.map((item, idx) => {
-                            return (
-                                <NavbarItemComponent key={idx} menuLinksArrProps={item}/>
-                            )
-                        })}
-                        {loggedIn ? (
-                            <NavbarItemComponent menuLinksArrProps="Log Out"/>
-                            ) :(
-                            <NavbarItemComponent menuLinksArrProps="Log In"/>
-                        )}
-                    </ul>
-                </nav>
-            </div> */}
         </>
     );
 };
