@@ -1,3 +1,4 @@
+/* global */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,9 +19,47 @@ h1 {
     display: inline-block;
 };
 
+div.main {
+    min-height: 50vh;
+
+    img {
+        width: 100%;
+    };
+};
+
+section {
+    padding: 3vh 0;
+};
+
 .row {
     margin-left: 0px;
     margin-right: 0px;
+};
+
+.no-padding {
+    padding: 0;
+};
+
+.left {
+    text-align: left;
+};
+
+.right {
+    text-align: right;
+};
+
+.center {
+    text-align: center;
+};
+
+@media screen and (max-width: 767px) {
+    .card {
+        margin-bottom: 3vh;
+    };
+
+    .responsive-center {
+        text-align: center;
+    };
 };
 
 footer {
@@ -73,12 +112,55 @@ footer {
     };
 };
 
+/* Elements */
+div.top-banner {
+    background-color: $logoColor;
+
+    img {
+        width: 100%;
+
+    };
+    
+    .fullSize {
+        display: inline-block;
+    };
+
+    .responsiveImg {
+        display: none;
+    };
+};
+
+div.read-more-btn {
+    padding: 2vh 0 !important;
+};
+
+section.call-to-action {
+    background-color: $logoColor;
+    color: $blackColor;
+};
+
+section.info-banner {
+    background-color: $blackColor;
+    color: $whiteColor;
+    padding: 15px;
+};
 
 
 /********************************/
 /*          Media Queries       */
 /********************************/
 @media screen and (max-width: 767px) {
+    div.top-banner {        
+        .fullSize {
+            display: none;
+        };
+    
+        .responsiveImg {
+            display: inline-block;
+        };
+    };
+
+
     footer div.main-footer {
         padding: 3vh 0 1vh;
 

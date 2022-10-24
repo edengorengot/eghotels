@@ -1,7 +1,39 @@
+import CallToAction from '../components/CallToAction/CallToAction';
+
 const About = () => {
     return (
         <>
-            <h1>About</h1>
+            <div className="top-banner">
+                    <img
+                         className="fullSize"
+                        src="/images/placeholder-image-1920-700.jpg"
+                        alt=""
+                    />
+
+                    <img
+                        className="responsiveImg"
+                        src="/images/placeholder-image-992-661.jpg"
+                        alt=""
+                    />
+            </div>
+
+            <div className="main container">
+                <section className="responsive-center">
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <h2>About EG Hotels</h2>
+                            <p>At EG Hotels, every stay is a story. And it starts with love. We believe luxury – meaningful, personalized, warm – is our love language, and we deliver it one small act at a time.</p>
+                            <h3>The EG story</h3>
+                            <p>A name synonymous around the world for continual innovation, remarkable expansion and a single-minded dedication to the highest standards of service, discover how EG Hotels has transformed the hospitality industry and redefined the meaning of luxury travel since first opening its doors back in 2022.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <CallToAction/>
         </>
     );
 };
