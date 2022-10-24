@@ -12,7 +12,7 @@ const HomePage = () => {
 
     return (
         <>
-            <Carousel className="top-slider" activeIndex={index} onSelect={handleSelect} fade> {/* variant="dark" */}
+            <Carousel className="top-slider" activeIndex={index} onSelect={handleSelect} fade>
                 <Carousel.Item>
                     <div className="overlay"></div>
                     <img

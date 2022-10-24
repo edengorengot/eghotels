@@ -18,7 +18,21 @@ const Logout = () => {
     
     return (
         <>
-            <h1>Log out</h1>
+            <div className="main container">
+                <section className="center">
+                    <div className="row">
+                        <div className="col-12 col-md-3"></div>
+                        <div className="col-12 col-md-6">
+                            <h2>Log Out Page</h2>
+                            <p>This is the Log-Out page, you don't supposed to see it for long.</p>
+                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <p>Our apologies, we cannot help you here.</p>
+                        </div>
+                        <div className="col-12 col-md-3"></div>
+                    </div>
+                </section>
+            </div>
+            <h1></h1>
         </>
     )
 };

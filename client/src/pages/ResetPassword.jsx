@@ -77,34 +77,57 @@ const ResetPassword = () => {
 
     return (
         <>
-            <div className="container">
-                <h1>Reset My Password</h1>
-                <form onSubmit={handleSubmit}>
+            <div className="top-banner">
+                <img
+                    className="fullSize"
+                    src="/images/placeholder-image-1920-700.jpg"
+                    alt=""
+                />
 
-                    <div className="mb-3">
-                        <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
-                        <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
-                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                <img
+                    className="responsiveImg"
+                    src="/images/placeholder-image-992-661.jpg"
+                    alt=""
+                />
+            </div>
+
+            <div className="main container">
+                <section className="center">
+                    <div className="row">
+                        <div className="col-12 col-md-3"></div>
+                        <div className="col-12 col-md-6 form-box">
+                            <h2>Reset My Password</h2>
+
+                            <form onSubmit={handleSubmit}>
+
+                                <div className="mb-3">
+                                    <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
+                                    <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
+                                    <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                                </div>
+
+                                <div className="mb-3">
+                                    <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password<span>*required</span></label>
+                                    <input type="password" className="form-control" id="inputPasswordRepeat" onChange={handlePasswordRepeatChange} value={inputPasswordRepeat} placeholder="Repeat your password here..."/>
+                                    <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="btn btn-dark"
+                                    disabled={
+                                        !inputPassword ||
+                                        !inputPasswordRepeat ||
+                                        !(inputPassword === inputPasswordRepeat)
+                                    }
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                        <div className="col-12 col-md-3"></div>
                     </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="inputPasswordRepeat" className="form-label">Repeat Password<span>*required</span></label>
-                        <input type="password" className="form-control" id="inputPasswordRepeat" onChange={handlePasswordRepeatChange} value={inputPasswordRepeat} placeholder="Repeat your password here..."/>
-                        <div id="passwordRepeatHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="btn btn-primary"
-                        disabled={
-                            !inputPassword ||
-                            !inputPasswordRepeat ||
-                            !(inputPassword === inputPasswordRepeat)
-                        }
-                    >
-                        Submit
-                    </button>
-                </form>
+                </section>
             </div>
         </>
     )

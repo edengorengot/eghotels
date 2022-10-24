@@ -92,30 +92,53 @@ const Login = () => {
 
     return (
         <>
-            <div className="container">
-                <h1>Login</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
-                        <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
-                        <div id="emailHelp" className="form-text">
-                            Enter your email address<br/>
-                            We'll never share your email with anyone else.
+            <div className="top-banner">
+                <img
+                    className="fullSize"
+                    src="/images/placeholder-image-1920-700.jpg"
+                    alt=""
+                />
+
+                <img
+                    className="responsiveImg"
+                    src="/images/placeholder-image-992-661.jpg"
+                    alt=""
+                />
+            </div>
+
+            <div className="main container">
+                <section className="center">
+                    <div className="row">
+                        <div className="col-12 col-md-3"></div>
+                        <div className="col-12 col-md-6 form-box">
+                            <h2>Login</h2>
+
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
+                                    <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
+                                    <div id="emailHelp" className="form-text">
+                                        Enter your email address<br/>
+                                        We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+
+                                <div className="mb-3">
+                                    <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
+                                    <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
+                                    <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
+                                </div>
+
+                                <button type="submit" className="btn btn-dark" disabled={!inputEmail || !inputPassword}>Submit</button>
+                            </form>
+
+                            <div className="form-link">
+                                <Link className="btn btn-dark" to={"/forgot-password"}>Forgot password?</Link>
+                            </div>
                         </div>
+                        <div className="col-12 col-md-3"></div>
                     </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="inputPassword" className="form-label">Password<span>*required</span></label>
-                        <input type="password" className="form-control" id="inputPassword" onChange={handlePasswordChange} value={inputPassword} placeholder="Enter a password here..."/>
-                        <div id="passwordHelp" className="form-text">You have to use at least 1 uppercase and lowercase character plus a number and a symbol (! @ # $ % ^ - & _ *).</div>
-                    </div>
-
-                    <button type="submit" className="btn btn-primary" disabled={!inputEmail || !inputPassword}>Submit</button>
-                </form>
-                
-                <h4>
-                    <Link to={"/forgot-password"}>Forgot password?</Link>
-                </h4>
+                </section>
             </div>
         </>
     );

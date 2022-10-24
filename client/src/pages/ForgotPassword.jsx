@@ -57,20 +57,42 @@ const ForgotPassword = () => {
 
     return (
         <>
-            <div className="container">
-                <h1>Forgot My Password</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
-                        <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
-                        <div id="emailHelp" className="form-text">
-                            Enter your email address<br/>
-                            We'll never share your email with anyone else.
-                        </div>
-                    </div>
+            <div className="top-banner">
+                    <img
+                         className="fullSize"
+                        src="/images/placeholder-image-1920-700.jpg"
+                        alt=""
+                    />
 
-                    <button type="submit" className="btn btn-primary" disabled={!inputEmail}>Submit</button>
-                </form>
+                    <img
+                        className="responsiveImg"
+                        src="/images/placeholder-image-992-661.jpg"
+                        alt=""
+                    />
+            </div>
+
+            <div className="main container">
+                <section className="center">
+                    <div className="row">
+                        <div className="col-12 col-md-3"></div>
+                        <div className="col-12 col-md-6 form-box">
+                            <h2>Forgot My Password</h2>
+
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="inputEmail" className="form-label">Email<span>*required</span></label>
+                                    <input type="email" className="form-control" id="inputEmail" onChange={handleEmailChange} value={inputEmail} placeholder="someone@gmail.com"/>
+                                    <div id="emailHelp" className="form-text">
+                                        Enter your email address<br/>
+                                        We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+                                <button type="submit" className="btn btn-dark" disabled={!inputEmail}>Submit</button>
+                            </form>
+                        </div>
+                        <div className="col-12 col-md-3"></div>
+                    </div>
+                </section>
             </div>
         </>
     );
