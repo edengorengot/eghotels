@@ -76,6 +76,36 @@ router.post('/login', async (req, res) => {
 });
 
 
+router.post('/contact', authMiddleware, async (req, res) => {
+  try {
+    let id = req.userData.id;
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let databaseCheckerId = await userModel.selectUserByID(id);
+    if (databaseCheckerId.length === 0) {
+      res.json({ message: "User does not exists."});
+    } else {
+      res.json({ message: "User's data sent successfully", databaseCheckerId });
+      // let validateData = await userValidation.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.validateAsync(req.body);
+
+
+
+      // sendResetEmail(validateData.email, resetPassword);
+
+
+
+
+
+    };
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
+  }
+});
+
+
 router.delete('/deleteuser', authMiddleware, async (req, res) => {
   try {
     let id = req.userData.id;
