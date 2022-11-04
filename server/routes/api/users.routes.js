@@ -76,7 +76,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post('/contact', authMiddleware, async (req, res) => {
+router.post('/contact', async (req, res) => {
   try {
     let id = req.userData.id;
     if (!id) {

@@ -1,37 +1,37 @@
 const mongoose = require("mongoose");
 
-const generalInformationSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        minlength: 5,
-        maxlength: 255,
-    },
-    telephone: {
-        type: String,
-        minlength: 9,
-        maxlength: 9,
-    },
-    address: {
-        type: String,
-        minlength: 2,
-        maxlength: 255,
-    },
-    city: {
-        type: String,
-        minlength: 2,
-        maxlength: 255,
-    },
-    country: {
-        type: String,
-        minlength: 2,
-        maxlength: 255,
-    },
-    region: {
-        type: String,
-        minlength: 2,
-        maxlength: 255,
-    },        
-});
+// const generalInformationSchema = new mongoose.Schema({
+//     email: {
+//         type: String,
+//         minlength: 5,
+//         maxlength: 255,
+//     },
+//     telephone: {
+//         type: String,
+//         minlength: 9,
+//         maxlength: 9,
+//     },
+//     address: {
+//         type: String,
+//         minlength: 2,
+//         maxlength: 255,
+//     },
+//     city: {
+//         type: String,
+//         minlength: 2,
+//         maxlength: 255,
+//     },
+//     country: {
+//         type: String,
+//         minlength: 2,
+//         maxlength: 255,
+//     },
+//     region: {
+//         type: String,
+//         minlength: 2,
+//         maxlength: 255,
+//     },        
+// });
 
 
 const hotelSchema = new mongoose.Schema({
@@ -40,18 +40,19 @@ const hotelSchema = new mongoose.Schema({
         required: true,
         minlength: 4,
         maxlength: 8,
-        unique: true,
+        // unique: true,
     },
     hotelName: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 255,
-        unique: true,
+        // unique: true,
     },
 
     generalInformation: {
-        type: generalInformationSchema,
+        // type: generalInformationSchema,
+        type: Object,
         default: {},
     },
 
@@ -103,7 +104,7 @@ const selectHotelByHotelID = (hotelId) => {
 };
 
 const selectHotelByName = (name) => {
-    return Hotels.find({name});
+    return Hotels.find({hotelName: name}).exec();
 };
 
 const selectAllHotels = () => {
