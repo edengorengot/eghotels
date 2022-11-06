@@ -103,8 +103,8 @@ const selectHotelByHotelID = (hotelId) => {
     return Hotels.find({hotelId});
 };
 
-const selectHotelByName = (name) => {
-    return Hotels.find({hotelName: name}).exec();
+const selectHotelByName = (hotelName) => {
+    return Hotels.find({hotelName}).exec();
 };
 
 const selectAllHotels = () => {
@@ -115,14 +115,22 @@ const updateHotelData = (id, newHotelData) => {
     return Hotels.findByIdAndUpdate(id, newHotelData);
 };
 
-const deleteHotel = (id) => {
-    return Hotels.findOneAndDelete({ _id: id }, (err, deletedHotel) => {
+const deleteHotel = async (id) => {
+    return await Hotels.findOneAndDelete({ _id: id }, (err, deletedHotel) => {
         if (err) {
             console.log("Error:", err);
         } else {
             console.log("Deleted:", deletedHotel);
         };
     });
+
+    // return await Hotels.findByIdAndDelete(id, (err, deletedHotel) => {
+    //     if (err) {
+    //         console.log("Error:", err);
+    //     } else {
+    //         console.log("Deleted:", deletedHotel);
+    //     };
+    // });
 };
 
 const deleteAllHotels = () => {
@@ -268,7 +276,7 @@ module.exports = {
 //     checkInTime: this.checkInAndOut.checkInTime,
 //     checkOutTime: this.checkInAndOut.checkOutTime,
 
-//     avalibility: {
+//     availability: {
 //         closeForSale: false,
 //         priceStage: 10,
 
