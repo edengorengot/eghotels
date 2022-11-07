@@ -83,6 +83,7 @@ const MyAccount = () => {
 
                 <Tab eventKey="reservations" title="Reservations">
                     <div className="container">
+                        <h2>My Favorite Hotels</h2>
                         <h2>My Reservations</h2>
                         <h1>On Constructions</h1>
                     </div>
@@ -95,13 +96,21 @@ const MyAccount = () => {
                     </div>
                 </Tab>
 
-                <Tab eventKey="contact" title="Contact">
+                <Tab eventKey="favorites" title="Favorite Hotels">
+                    <div className="container">
+                        <h2>My Favorite Hotels</h2>
+                        <p>adding and deleting favorite hotels</p>
+                        <h1>On Constructions</h1>
+                    </div>
+                </Tab>
+
+                {/* <Tab eventKey="contact" title="Contact">
                     <div className="container">
                         <h2>Contact Us</h2>
                         <h5>Open Socket</h5>
                         <h1>On Constructions</h1>
                     </div>
-                </Tab>
+                </Tab> */}
 
                 <Tab eventKey="settings" title="Settings">
                     <div className="container">
