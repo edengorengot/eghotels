@@ -1,234 +1,176 @@
-const hotel = {
-    pricePerStage: 200,
-    priceRates: {},
+const Users = {
+	id,
+	firstName,
+	lastName,
+	email,
+	mobilePhone,
+	telephone,
+	password,
+	// profileImg,
+	createdAt,
 
-    maxCapacity: {},
-    checkInTime: "15:00",
-    checkInTimeSaterdayAndHoliday: "18:00",
-    checkInTimePeakTime: "18:00",
-    checkInTimeSpecial: "12:00",
-    checkOutTime: "12:00",
-    checkOutTimeSaterdayAndHoliday: "15:00",
-    checkOutTimePeakTime: "12:00",
-    checkOutTimeSpecial: "12:00",
+    reservations: [ "000001", "000024", "000450" ],
+    clubPoints: 5,
 
-
-    avalibility: {
-        year2022: {
-            year: 2022,
-            summer: {},
-            january: {
-                season: "Winter",
-            },
-            february,
-            march,
-            april,
-            may,
-            june,
-            july,
-            august,
-            september,
-            october: {
-                first: {
-                    day: "saturday",
-                    holiday: "",
-                    comment: "",
-                    closeForSale: false,
-                    checkInTime: checkInTime,
-                    checkOutTime: checkOutTime,
-                    priceStage: 10,
-                    roomsAvailable: {
-                        deluxeRoomsCategory: {
-                            categoryCloseForSale: false,
-                            deluxeRoomsTwins: {
-                                typeCloseForSale: true,
-                                amount: 20,
-                            },
-                            deluxeRoomsDouble: 30
-                        },
-                        executiveRoomsCategory: {
-
-                        },
-                        suiteCategory: {},
-                    },
-                },
-                second: {},
-                third: {},
-                fourth: {
-                    note: "",
-                    checkInTime: checkInTime,
-                    checkOutTime: checkOutTime,
-                    holiday: "ערב יום כיפור",
-                },
-                fifth: {
-                    holiday: "יום כיפור",
-                    checkInTime: checkInTime,
-                    checkOutTime: checkOutTime,
-                },
-                sixth: {},
-                seventh: {},
-                eighth: {},
-                ninth: {},
-                tenth: {},
-                eleventh: {},
-                twelfth: {},
-                thirteenth: {},
-                fourteenth: {},
-                fifteenth: {},
-                sixteenth: {},
-                seventeenth: {},
-                eighteenth: {},
-                nineteenth: {},
-                twentieth: {},
-                twentyFirst: {},
-                twentySecond: {},
-                twentyThird: {},
-                twentyFourth: {},
-                twentyFifth: {},
-                twentySixth: {},
-                twentySeventh: {},
-                twentyEighth: {},
-                twentyNinth: {},
-                thirtieth: {},
-                thirtyFirst: {},
-            },
-            november,
-            december
+    preferences: {
+        accessibleRoom: true,
+        accessibleParking: true,
+        accessibleCar: {
+            brand: "Toyota",
+            model: "Corolla",
+            color: "White",
+            carNumber: "12-345-67"
         },
-    },
-};
-// January, February, march, April, May, June, July, August, September, October, November and December
-
-// 1st: First   11th: Eleventh  21st: Twenty-First  31st: Thirty-First
-// 2nd: Second  12th: Twelfth   22nd: Twenty-Second 32nd: Thirty-Second
-// 3rd: Third   13th: Thirteenth    23rd: Twenty-Third
-// 4th: Fourth  14th: Fourteenth    24th: Twenty-Fourth
-// 5th: Fifth   15th: Fifteenth 25th: Twenty-Fifth
-// 6th: Sixth   16th: Sixteenth 26th: Twenty-Sixth
-// 7th: Seventh 17th: Seventeenth   27th: Twenty-Seventh
-// 8th: Eighth  18th: Eighteenth    28th: Twenty-Eighth
-// 9th: Ninth   19th: Nineteenth    29th: Twenty-Ninth
-// 10th: Tenth  20th: Twentieth 30th: Thirtieth
-
-// sunday monday tuesday wednesday thursday friday saturday
-
-
-
-
-// {
-//     "name": "Dan Carmel",
-//     "id": "0001",
-//     "rooms": {
-       
-//     }
-// }
-
-
-
-
-const hotel2 = {
-    pricePerStage: 200,
-    // עזיבה רגילה
-    // עזיבה בשבת
-    // קבלת חדרים רגילה
-    // קבלת חדרים בשבת
-    // קבלת חדרים מיוחדת
-    // עזיבת חדרים מיוחדת
-
-
-
-    avalibility: {
-        year2022: {
-            year: 2022,
-            season: "winter",
-            january: {},
-            february,
-            march,
-            april,
-            may,
-            june,
-            july,
-            august,
-            september,
-            october: {
-                first: {
-                    day: "saturday",
-                    holiday: "",
-                    comment: "",
-                    closeForSale: false,
-                    priceStage: 10,
-                    roomsAvailable: {
-                        deluxeRoomsCategory: {
-                            categoryCloseForSale: false,
-                            deluxeRoomsTwins: {
-                                typeCloseForSale: true,
-                                amount: 20,
-                            },
-                            deluxeRoomsDouble: 30
-                        },
-                        executiveRoomsCategory: {
-
-                        },
-                        suiteCategory: {},
-                    },
-                },
-                second: {},
-                third: {},
-                fourth: {
-                    note: "",
-                    arrivalTime: normalTime,
-                    holiday: "ערב יום כיפור",
-                },
-                fifth: {
-                    holiday: "יום כיפור"
-                },
-                sixth: {},
-                seventh: {},
-                eighth: {},
-                ninth: {},
-                tenth: {},
-                eleventh: {},
-                twelfth: {},
-                thirteenth: {},
-                fourteenth: {},
-                fifteenth: {},
-                sixteenth: {},
-                seventeenth: {},
-                eighteenth: {},
-                nineteenth: {},
-                twentieth: {},
-                twentyFirst: {},
-                twentySecond: {},
-                twentyThird: {},
-                twentyFourth: {},
-                twentyFifth: {},
-                twentySixth: {},
-                twentySeventh: {},
-                twentyEighth: {},
-                twentyNinth: {},
-                thirtieth: {},
-                thirtyFirst: {},
-            },
-            november,
-            december
-        },
-    },
+        twinBeds: true, // separatedBeds
+        doubleBed: false,
+        balcony: true,
+        bathtub: false,
+        showerStall: true, // (מקלחון)
+        DoorToDoor: false, // (דלת מול דלת)
+        adjoiningRooms: true, // (דלתות צמודות)
+        interconnectingRooms: true, // (דלת מקשרת [וצמוד]),
+        farFromElevator: true,
+        closeToElevator: false,
+        quietRoom: true,
+        highFloor: true,
+        lowFloor: false,
+        preferredFloor: 5,
+        shabbatObservant: false, // (שומר שבת),
+        preferBetterView: true,
+    }
 };
 
-let st1 = "text";
+const Hotels = {
+    id,
+	Name,
+	checkInTime: "15:00",
+	checkOutTime: "12:00",
+	checkInTimeSaturdaysAndHolidays: "18:00",
+	checkOutTimeSaturdaysAndHolidays: "15:00",
+    checkInTimePeakPeriods: "18:00",
+    checkOutTimePeakPeriods: "12:00",
+
+    freeCancellationPolicyHours: 48, // 2 days before arrival
+    freeCancellationPolicyHoursPeak: 168, // 7 days before arrival
+    freeCancellationPolicyHoursDoublePeak: 336, // 14 days before arrival
+    freeCancellationPolicyHoursTopPeak: 720, // 30 days before arrival
+
+    accommodationArrangement: [RO, BB, HB, FB],
+    mealPrices: {
+        midweekBreakfastForAdult: 100,
+        midweekBreakfastForKid: 50,
+        midweekDinnerForAdult: 200,
+        midweekDinnerForKid: 100,
+        midweekLunchForAdult: 150,
+        midweekLunchForKid: 75,
+        fridayDinnerForAdult: 250,
+        fridayDinnerForKid: 125,
+        saturdayBreakfastForAdult: 120,
+        saturdayBreakfastForKid: 60,
+        saturdayLunchForAdult: 180,
+        saturdayLunchForKid: 90,
+    },
+
+    basePriceForOneStage: 200,
+    
+    rooms: [
+        {
+            id: "001",
+            name: "Deluxe Room",
+            numberOfRooms: 50,
+            prices: {
+                priceRate: {
+                    single: 0.9,
+                    double: 1, // { adults: 2, kids: 0, babies: 0 } || { adults: 1, kids: 1, babies: 0 }
+                    triple: 1.25,
+                    tripleAdults: 1.3,
+                    quad: 1.5,
+                },
+                baby: 40,
+            },
 
 
-// January, February, march, April, May, June, July, August, September, October, November and December
+            maxCapacity: [
+                { adults: 3, kids: 0, babies: 0 },
+                { adults: 2, kids: 0, babies: 2 },
+                { adults: 2, kids: 1, babies: 1 },
+                { adults: 2, kids: 2, babies: 0 },
+            ],
+            minCapacity: [
+                { adults: 1, kids: 0, babies: 0 },
+                { adults: 0, kids: 1, babies: 0 }, // תלוי בחדר נוסף עם מבוגר
+            ],
+            ProhibitedCapacity: [
+                { adults: 0, kids: 0, babies: 1 }, // אין אפשרות לשים תינוק לבד
+            ],
+        },
+        {
+            id: "002",
+            name: "Executive Room",
+            numberOfRooms: 30,
+            prices: {
+                priceRate: {
+                    single: 1.2,
+                    double: 1.3, // { adults: 2, kids: 0, babies: 0 } || { adults: 1, kids: 1, babies: 0 }
+                    triple: 1.55,
+                    tripleAdults: 1.6,
+                },
+                baby: 40,
+            },
+            maxCapacity: [
+                { adults: 3, kids: 0, babies: 0 },
+                { adults: 2, kids: 0, babies: 1 },
+                { adults: 2, kids: 1, babies: 0 },
+                { adults: 1, kids: 2, babies: 0 },
+                { adults: 1, kids: 1, babies: 1 },
+                { adults: 1, kids: 0, babies: 2 },
+            ],
+            minCapacity: [
+                { adults: 1, kids: 0, babies: 0 },
+                { adults: 0, kids: 1, babies: 0 }, // תלוי בחדר נוסף עם מבוגר
+            ],
+            ProhibitedCapacity: [
+                { adults: 0, kids: 0, babies: 1 }, // אין אפשרות לשים תינוק לבד
+            ],
+        },
+        {
+            id: "003",
+            name: "Suite",
+            numberOfRooms: 5,
+            prices: {
+                priceRate: {
+                    single: 4.8,
+                    double: 5, // { adults: 2, kids: 0, babies: 0 } || { adults: 1, kids: 1, babies: 0 }
+                },
+                baby: 40,
+            },
+            maxCapacity: [
+                { adults: 2, kids: 0, babies: 0 },
+                { adults: 1, kids: 0, babies: 1 },
+                { adults: 1, kids: 1, babies: 0 },
+                { adults: 0, kids: 2, babies: 0 }, // תלוי בחדר נוסף עם מבוגר
+                { adults: 0, kids: 1, babies: 1 }, // תלוי בחדר נוסף עם מבוגר
+            ],
+            minCapacity: [
+                { adults: 1, kids: 0, babies: 0 },
+                { adults: 0, kids: 1, babies: 0 }, // תלוי בחדר נוסף עם מבוגר
+            ],
+            ProhibitedCapacity: [
+                { adults: 0, kids: 0, babies: 1 }, // אין אפשרות לשים תינוק לבד
+            ],
+        },
+    ],
+};
 
-// 1st: First   11th: Eleventh  21st: Twenty-First  31st: Thirty-First
-// 2nd: Second  12th: Twelfth   22nd: Twenty-Second 32nd: Thirty-Second
-// 3rd: Third   13th: Thirteenth    23rd: Twenty-Third
-// 4th: Fourth  14th: Fourteenth    24th: Twenty-Fourth
-// 5th: Fifth   15th: Fifteenth 25th: Twenty-Fifth
-// 6th: Sixth   16th: Sixteenth 26th: Twenty-Sixth
-// 7th: Seventh 17th: Seventeenth   27th: Twenty-Seventh
-// 8th: Eighth  18th: Eighteenth    28th: Twenty-Eighth
-// 9th: Ninth   19th: Nineteenth    29th: Twenty-Ninth
-// 10th: Tenth  20th: Twentieth 30th: Thirtieth
 
-// sunday monday tuesday wednesday thursday friday saturday
+const Reservations = {
+    id,
+    hotelName,
+    userID, // and all the other data
+    arrivalDate,
+    departureDate,
+    nights,
+    accommodationArrangement, // plan BB, HB, FB, All Included
+};
+
+

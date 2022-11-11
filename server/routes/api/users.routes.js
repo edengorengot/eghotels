@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const userValidation = require('../../validation/users.validation');
+const hotelValidation = require('../../validation/hotels.validation');
 const userModel = require('../../model/users.model');
+const hotelModel = require('../../model/hotels.model');
 const bcrypt = require('../../config/bcrypt');
 const jwt = require('../../config/jwt');
 const authMiddleware = require('../../middleware/auth.middleware');
 const { sendResetEmail } = require('../../email/sendResetEmail');
+const { sendContactEmail } = require('../../email/sendContactEmail');
+const { sendContactEmailUser } = require('../../email/sendContactEmailUser');
 
 
 
@@ -78,27 +82,15 @@ router.post('/login', async (req, res) => {
 
 router.post('/contact', async (req, res) => {
   try {
-    let id = req.userData.id;
-    if (!id) {
-      res.status(401).json({ message: "There is no ID in the request." });
-      return;
-    };
+    let validateData = await userValidation.validateContactSchema.validateAsync(req.body);
+    let databaseCheckerEmail = await userModel.selectUserByEmail(validateData.email);
 
-    let databaseCheckerId = await userModel.selectUserByID(id);
-    if (databaseCheckerId.length === 0) {
-      res.json({ message: "User does not exists."});
+    if (databaseCheckerEmail.length === 0) {
+      sendContactEmail(validateData.email, validateData);
+      res.json({ message: "Your form has been successfully submitted."});
     } else {
-      res.json({ message: "User's data sent successfully", databaseCheckerId });
-      // let validateData = await userValidation.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.validateAsync(req.body);
-
-
-
-      // sendResetEmail(validateData.email, resetPassword);
-
-
-
-
-
+      sendContactEmailUser(validateData.email, validateData, databaseCheckerEmail[0]);
+      res.json({ message: "Your form has been successfully submitted."});
     };
   } catch (err) {
     res.status(401).json({ message: "Something went wrong.", err });
@@ -147,7 +139,7 @@ router.get('/userbyid', authMiddleware, async (req, res) => {
     };
 
     let databaseCheckerId = await userModel.selectUserByID(id);
-    if (databaseCheckerId.length === 0) {
+    if (!databaseCheckerId) {
       res.json({ message: "User does not exists."});
     } else {
       res.json({ message: "User's data sent successfully", databaseCheckerId });
@@ -291,5 +283,47 @@ router.patch('/reset-password/:resetPassword/:email', async (req, res) => {
     res.status(401).json({ message: "Something went wrong.", err });
   }
 });
+
+
+router.patch('/favorite-hotels', authMiddleware, async (req, res) => {
+  try {
+    let id = req.userData.id;
+    
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let databaseCheckerId = await userModel.selectUserByID(id);
+
+    if (!databaseCheckerId) {
+      res.json({ message: "User does not exists."});
+    } else {
+      let favoriteHotels = databaseCheckerId.favoriteHotels;
+      let validateData = await hotelValidation.validateUpdateHotelsSchema.validateAsync(req.body);
+      let databaseCheckerHotelName = await hotelModel.selectHotelByName(validateData.hotelName);
+
+      if (databaseCheckerHotelName.length === 1) {
+        let favoriteSearch = favoriteHotels.indexOf(validateData.hotelName);
+
+        if (favoriteSearch === -1) {
+          favoriteHotels.push(validateData.hotelName);
+        } else {
+          favoriteHotels = favoriteHotels.filter(element => element !== validateData.hotelName);
+        };
+
+        let updatedUserData = await userModel.updateUserData(id, { favoriteHotels: favoriteHotels });
+                    
+        res.json({ message: "Favorites hotels changed successfully" });
+      } else {
+        res.json({ message: "There is no hotel with that name!" });
+      };
+    };
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
+  }
+});
+
+
 
 module.exports = router;

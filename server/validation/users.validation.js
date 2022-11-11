@@ -49,10 +49,18 @@ const validateResetPasswordSchema = Joi.object({
     email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
 });
 
+const validateContactSchema = Joi.object({
+    firstName: Joi.string().required().alphanum().min(2).max(255),
+    lastName: Joi.string().required().alphanum().min(2).max(255),
+    email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
+    body: Joi.string().optional().max(2000),
+});
+
 module.exports = {
     validateUsersSchema,
     passwordVerification,
     validateLoginUsersSchema,
     validateUpdateUsersSchema,
-    validateResetPasswordSchema
+    validateResetPasswordSchema,
+    validateContactSchema
 };

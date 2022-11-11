@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv').config();
 
-const sendContactEmail = (email, userFormInformation) => {
+const sendContactEmailUser = (email, userFormInformation, userData) => {
   try {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -14,9 +14,9 @@ const sendContactEmail = (email, userFormInformation) => {
     let userResponseMailOptions = {
       from: process.env.MAILUSERNAME,
       to: email,
-      subject: 'Thank you for contacting EG Hotels',
+      subject: 'Hi friend, EG Hotels will contact you shortly',
       html: `
-        <h1>Thank you for reaching out to EG Hotels.</h1>
+        <h1>Thank you ${userFormInformation.firstName} for reaching out to EG Hotels.</h1>
         <p>We will get in touch with you very soon.</p>
 
         <h6>Here is a copy of what you filled:</h6>
@@ -28,7 +28,7 @@ const sendContactEmail = (email, userFormInformation) => {
     let companyMailOptions = {
       from: process.env.MAILUSERNAME,
       to: process.env.MAILUSERNAME,
-      subject: 'A new form has been filled at EG Hotels contact page from a non-registered user',
+      subject: 'A new form has been filled at EG Hotels contact page from an existing user',
       html: `
       <h1>New contact form was filled at EG Hotels contact page at the website</h1>
 
@@ -37,7 +37,14 @@ const sendContactEmail = (email, userFormInformation) => {
       <p>Last Name: ${userFormInformation.lastName}</p>
       <p>Email: ${userFormInformation.email}</p>
       <p>Message: ${userFormInformation.body}</p>
-      
+
+      <h3>Here are his user information:</h3>
+      <p>First Name: ${userData.firstName}</p>
+      <p>Last Name: ${userData.lastName}</p>
+      <p>Email: ${userData.email}</p>
+      <p>Phone: ${userData.mobilePhone}</p>
+      <p>admin tier: ${userData.admin}</p>
+
       <h3>Have a nice day from EG Hotels</h3>`,
     };
 
@@ -63,5 +70,5 @@ const sendContactEmail = (email, userFormInformation) => {
 };
 
 module.exports = {
-    sendContactEmail,
+  sendContactEmailUser,
 };

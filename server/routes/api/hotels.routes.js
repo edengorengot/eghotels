@@ -70,7 +70,7 @@ router.patch('/adding-availability', adminMiddleware, async (req, res) => {
     let admin = parseInt(req.userData.admin);
     let year = parseInt(req.body.year);
     req.body.year = year;
-
+    
     
     let userDatabaseChecker = await userModel.selectUserByID(userId);
     
@@ -81,32 +81,22 @@ router.patch('/adding-availability', adminMiddleware, async (req, res) => {
     
     let validateData = await hotelValidation.validateUpdateHotelsSchema.validateAsync(req.body);
     let databaseCheckerHotelName = await hotelModel.selectHotelByName(validateData.hotelName);
-
-    
-    console.log("validateData:", validateData);
-
-
+        
     if (databaseCheckerHotelName.length === 1) {
-      let updatedHotelData = databaseCheckerHotelName[0];
+      let HotelData = databaseCheckerHotelName[0];
+      let yearKey = `year${validateData.year}`;
+
+      if (HotelData.availability[yearKey]) {
+        res.json({ message: "This year already created." });
+        return;
+      };
 
       let yearlyAvailability = await availabilityModel.createYearlyHotelAvailability(year);
-      
+      HotelData.availability[yearKey] = yearlyAvailability;
 
-      // if (validateData.year % 4 === 0) {
-      //   let yearlyAvailability = await availabilityModel.skipYearTemplate(year);
-      //   console.log("skip year");
-      //   console.log("yearly Availability:", yearlyAvailability);
-      //   // updatedHotelData.availability = 3;
-      // } else {
-      //   let yearlyAvailability = await availabilityModel.regularYearTemplate(year);
-      //   console.log("regular year");
-      //   console.log("yearly Availability:", yearlyAvailability);
-      // };
+      let updatedHotel = await hotelModel.updateHotelData(HotelData._id, HotelData);
 
-      // let updatedHotel = await hotelModel.updateHotelData(databaseCheckerHotelName.id, updatedHotelData);
-      // let updatedHotel = yearlyAvailability;
-
-      res.json({ message: "The hotel has been updated!", yearlyAvailability });
+      res.json({ message: "The hotel has been updated!", updatedHotel });
     } else {
       res.json({ message: "There is no hotel with that name!" });
     };
@@ -116,14 +106,7 @@ router.patch('/adding-availability', adminMiddleware, async (req, res) => {
 });
 
 
-
-// router.patch('update', adminMiddleware, async (req, res) => {
-
-// });
-
-
-
-// router.patch('/update-hotel', async (req, res) => {
+// router.patch('/update', adminMiddleware, async (req, res) => {
 //   try {
 //       let validateData = await hotelValidation.validateUpdateHotelSchema(req.body);
 //       let databaseCheckerId = await hotelModel.selectHotelByID(validateData.Id);
@@ -172,6 +155,6 @@ router.delete('/delete', adminMiddleware, async (req, res) => {
   };
 });
 
-// add callender year
+
 
 module.exports = router;
