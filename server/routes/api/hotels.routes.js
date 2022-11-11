@@ -132,7 +132,8 @@ router.delete('/delete', adminMiddleware, async (req, res) => {
   try {
     let userId = req.userData.token.id;
     let admin = parseInt(req.userData.admin);
-
+    let hotelName = req.headers.hotelname;
+    
     let userDatabaseChecker = await userModel.selectUserByID(userId);
 
     if (admin < 2 || admin !== userDatabaseChecker.admin) {
@@ -140,11 +141,10 @@ router.delete('/delete', adminMiddleware, async (req, res) => {
       return;
     };
 
-    let validateData = await hotelValidation.validateSearchHotelsSchema.validateAsync(req.body)
+    let validateData = await hotelValidation.validateSearchHotelsSchema.validateAsync({ hotelName });    
     let databaseCheckerHotelName = await hotelModel.selectHotelByName(validateData.hotelName);
 
     if (databaseCheckerHotelName.length === 1) {
-
       let deletedHotel = await hotelModel.deleteHotel(databaseCheckerHotelName[0]._id);
       res.json({ message: "The hotel has been deleted!", deletedHotel });
     } else {

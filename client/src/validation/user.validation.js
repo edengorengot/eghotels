@@ -42,7 +42,6 @@ const userValidation = {
         telephone: Joi.string().regex(/^(0+[23489]{1})+(-?)+(\d{7})$/).min(9).max(10).allow(''),
         password: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255),
         passwordRepeat: Joi.string().regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[!@#$%^\-&_*])([A-Za-z\d!@#$%^\-&_*]{8,255})$/).min(8).max(255),
-        // admin: Joi.isNumber().min(0).max(3),
         // favoriteHotels
         // reservations:
         // clubPoints
@@ -61,6 +60,11 @@ const userValidation = {
         email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255).required(),
         body: Joi.string().max(2000).required(),
         // body: Joi.string().max(2000).allow(''),
+    },
+
+    adminSchema: {
+        email: Joi.string().email().regex(/^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.(([A-Za-z]{2,5})|(co\.il)|(com))$/).lowercase().min(5).max(255).required(),
+        admin: Joi.number().integer().min(0).max(3),
     },
 };
 

@@ -56,11 +56,17 @@ const validateContactSchema = Joi.object({
     body: Joi.string().optional().max(2000),
 });
 
+const validateAdminSchema = Joi.object({
+    email: Joi.string().required().email().pattern(new RegExp("^([A-Za-z0-9-._])+@([A-Za-z0-9-._])+\.([A-Za-z]{2,5})|(co\.il)|(com)$")).lowercase().min(5).max(255),
+    admin: Joi.number().required().min(0).max(3),
+});
+
 module.exports = {
     validateUsersSchema,
     passwordVerification,
     validateLoginUsersSchema,
     validateUpdateUsersSchema,
     validateResetPasswordSchema,
-    validateContactSchema
+    validateContactSchema,
+    validateAdminSchema
 };

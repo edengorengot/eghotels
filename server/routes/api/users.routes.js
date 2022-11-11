@@ -7,6 +7,7 @@ const hotelModel = require('../../model/hotels.model');
 const bcrypt = require('../../config/bcrypt');
 const jwt = require('../../config/jwt');
 const authMiddleware = require('../../middleware/auth.middleware');
+const adminMiddleware = require('../../middleware/admin.middleware');
 const { sendResetEmail } = require('../../email/sendResetEmail');
 const { sendContactEmail } = require('../../email/sendContactEmail');
 const { sendContactEmailUser } = require('../../email/sendContactEmailUser');
@@ -203,6 +204,35 @@ router.patch('/update', authMiddleware, async (req, res) => {
   } catch (err) {
     res.status(401).json({ message: "Something went wrong.", err });
   }
+});
+
+
+router.patch('/admin', adminMiddleware, async (req, res) => {
+  try {
+    let userId = req.userData.token.id;
+    let admin = parseInt(req.userData.admin);
+
+    let userDatabaseChecker = await userModel.selectUserByID(userId);
+    
+    if (admin < 3 || admin !== userDatabaseChecker.admin) {
+      res.status(401).json({ message: "The admin tier is not at the right level or your info is not the same as the Database!" });
+      return;
+    };
+
+    let validateData = await userValidation.validateAdminSchema.validateAsync(req.body);
+    let databaseCheckerEmail = await userModel.selectUserByEmailFull(validateData.email);
+
+    if (databaseCheckerEmail.length === 1) {
+      let userData = databaseCheckerEmail[0];
+      let updatedUserData = await userModel.updateUserData(userData.id, { admin: validateData.admin });
+
+      res.json({message: "You have successfully changed the admin tier of your other account."});
+    } else {
+      res.json({ message: "There are no user with this email." });
+    };
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
+  };
 });
 
 

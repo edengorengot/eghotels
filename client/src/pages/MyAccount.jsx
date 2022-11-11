@@ -12,6 +12,7 @@ const MyAccount = () => {
     const token = localStorage.getItem("token");
     const [showSpinnerUserData, setShowSpinnerUserData] = useState(false);
     const [user, setUser] = useState({});
+    const [key, setKey] = useState('home');
 
     useEffect(() => {
         setShowSpinnerUserData(false);
@@ -49,11 +50,21 @@ const MyAccount = () => {
         });
       }, [token]);
 
-    const [key, setKey] = useState('home');
-
     return (
         <>
-            <h1>MyAccount</h1>
+            <div className="top-banner">
+                <img
+                    className="fullSize"
+                    src="/images/placeholder-image-1920-700.jpg"
+                    alt=""
+                />
+
+                <img
+                    className="responsiveImg"
+                    src="/images/placeholder-image-992-661.jpg"
+                    alt=""
+                />
+            </div>
 
             <Tabs
                 activeKey={key}
@@ -68,14 +79,46 @@ const MyAccount = () => {
                         {
                             showSpinnerUserData === false &&
                             <>
-                                <p>Welcome {user.firstName} {user.lastName}.</p>
-                                <p>You have {user.clubPoints} club points right now.</p>
-                                <p>Club member since: {user.registered}</p>
+                                <div className="container">
+                                    <section className="center">
+                                        <div className="row">
+                                            <div className="col-12 col-md-3"></div>
+                                            <div className="col-12 col-md-6">
+                                                <h2>My Account</h2>
+                                                <p>Welcome {user.firstName} {user.lastName}.</p>
+                                                <p>You have {user.clubPoints} club points right now.</p>
+                                                <p>Club member since: {user.registered}</p>
+                                            </div>
+                                            <div className="col-12 col-md-3"></div>
+                                        </div>
+                                    </section>
 
-                                <h2>My Active Reservations</h2>
-                                <h1>On Constructions</h1>
-                                <h2>My Favorite Hotels</h2>
-                                <h1>On Constructions</h1>
+                                    <hr />
+
+                                    <section className="center">
+                                        <div className="row">
+                                            <div className="col-12 col-md-3"></div>
+                                            <div className="col-12 col-md-6 form-box">
+                                                <h2>My Active Reservations</h2>
+                                                <h1>On Constructions</h1>
+                                            </div>
+                                            <div className="col-12 col-md-3"></div>
+                                        </div>
+                                    </section>
+
+                                    <hr />
+
+                                    <section className="center">
+                                        <div className="row">
+                                            <div className="col-12 col-md-3"></div>
+                                            <div className="col-12 col-md-6">
+                                                <h2>My Favorite Hotels</h2>
+                                                <h1>On Constructions</h1>
+                                            </div>
+                                            <div className="col-12 col-md-3"></div>
+                                        </div>
+                                    </section>
+                                </div>
                             </>
                         }
                     </div>
@@ -91,8 +134,16 @@ const MyAccount = () => {
 
                 <Tab eventKey="profile" title="My Profile">
                     <div className="container">
-                        <h2>My Profile</h2>
-                        <UpdateUser token={token} user={user}/>
+                        <section className="center">
+                            <div className="row">
+                                <div className="col-12 col-md-3"></div>
+                                <div className="col-12 col-md-6 form-box">
+                                    <h2>My Profile</h2>
+                                    <UpdateUser token={token} user={user}/>
+                                </div>
+                                <div className="col-12 col-md-3"></div>
+                            </div>
+                        </section>
                     </div>
                 </Tab>
 
@@ -114,8 +165,16 @@ const MyAccount = () => {
 
                 <Tab eventKey="settings" title="Settings">
                     <div className="container">
-                        <h2>My Settings</h2>
-                        <DeleteUser token={token}/>
+                        <section className="center">
+                            <div className="row">
+                                <div className="col-12 col-md-3"></div>
+                                <div className="col-12 col-md-6 form-box">
+                                    <h2>My Settings</h2>
+                                    <DeleteUser token={token}/>
+                                </div>
+                                <div className="col-12 col-md-3"></div>
+                            </div>
+                        </section>
                     </div>
                 </Tab>
             </Tabs>
