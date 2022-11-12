@@ -113,8 +113,21 @@ const selectHotelByName = (hotelName) => {
     return Hotels.find({hotelName}).exec();
 };
 
-const selectAllHotels = () => {
-    return Hotels.find({});
+const selectAllHotels = async () => {
+    let allHotels = await Hotels.find({});
+    let filletedHotels = [];
+
+    allHotels.forEach(element => {
+        let shortenHotel = {
+            id: element._id,
+            hotelId: element.hotelId,
+            hotelName: element.hotelName,
+        };
+        
+        filletedHotels.push(shortenHotel);
+    });
+
+    return filletedHotels;
 };
 
 const updateHotelData = (id, newHotelData) => {

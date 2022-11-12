@@ -10,6 +10,7 @@ const validateSearchHotelsSchema = Joi.object({
 });
 
 const validateUpdateHotelsSchema = Joi.object({
+    id: Joi.string().optional().min(5).max(255),
     hotelName: Joi.string().optional().min(1).max(255),
     newHotelName: Joi.string().optional().min(1).max(255),
     year: Joi.number().optional().min(2000).max(3000),

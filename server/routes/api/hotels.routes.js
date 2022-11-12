@@ -4,8 +4,8 @@ const hotelValidation = require('../../validation/hotels.validation');
 const hotelModel = require('../../model/hotels.model');
 const userModel = require('../../model/users.model');
 const availabilityModel = require('../../model/availability.model');
+const authMiddleware = require('../../middleware/auth.middleware');
 const adminMiddleware = require('../../middleware/admin.middleware');
-
 
 
 router.post('/create', adminMiddleware, async (req, res) => {
@@ -61,6 +61,22 @@ router.get('/find', adminMiddleware, async (req, res) => {
     };
   } catch (err) {
       res.status(401).json({ message: "Something went wrong.", err });
+  };
+});
+
+
+router.get('/all', authMiddleware, async (req, res) => {
+  try {
+    let id = req.userData.id;
+    if (!id) {
+      res.status(401).json({ message: "There is no ID in the request." });
+      return;
+    };
+
+    let allHotels = await hotelModel.selectAllHotels();
+    res.json({ message: "The hotels has been loaded!", allHotels });
+  } catch (err) {
+    res.status(401).json({ message: "Something went wrong.", err });
   };
 });
 

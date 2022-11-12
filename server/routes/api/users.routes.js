@@ -191,8 +191,6 @@ router.patch('/update', authMiddleware, async (req, res) => {
 
     let validateData = await userValidation.validateUpdateUsersSchema.validateAsync(req.body);
 
-    // if password userValidation password check
-
     if (validateData.password) {
       hashedPassword = await bcrypt.createHash(validateData.password);
       validateData.password = hashedPassword;
@@ -331,15 +329,16 @@ router.patch('/favorite-hotels', authMiddleware, async (req, res) => {
     } else {
       let favoriteHotels = databaseCheckerId.favoriteHotels;
       let validateData = await hotelValidation.validateUpdateHotelsSchema.validateAsync(req.body);
-      let databaseCheckerHotelName = await hotelModel.selectHotelByName(validateData.hotelName);
 
-      if (databaseCheckerHotelName.length === 1) {
-        let favoriteSearch = favoriteHotels.indexOf(validateData.hotelName);
+      let databaseCheckerHotelId = await hotelModel.selectHotelByID(validateData.id);
+
+      if (databaseCheckerHotelId) {
+        let favoriteSearch = favoriteHotels.indexOf(validateData.id);
 
         if (favoriteSearch === -1) {
-          favoriteHotels.push(validateData.hotelName);
+          favoriteHotels.push(validateData.id);
         } else {
-          favoriteHotels = favoriteHotels.filter(element => element !== validateData.hotelName);
+          favoriteHotels = favoriteHotels.filter(element => element !== validateData.id);
         };
 
         let updatedUserData = await userModel.updateUserData(id, { favoriteHotels: favoriteHotels });
