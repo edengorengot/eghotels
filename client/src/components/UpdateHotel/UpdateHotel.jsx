@@ -7,18 +7,18 @@ import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const CreateHotel = (props) => {
+const FindHotel = (props) => {
     const token = props.token;
     const admin = props.admin;
-    const [inputHotelId, setInputHotelId] = useState("");
     const [inputHotelName, setInputHotelName] = useState("");
-
-    const handleHotelIdChange = (e) => {
-        setInputHotelId(e.target.value);
-    };
+    const [inputNewHotelName, setInputNewHotelName] = useState("");
 
     const handleHotelNameChange = (e) => {
         setInputHotelName(e.target.value);
+    };
+
+    const handleNewHotelNameChange = (e) => {
+        setInputNewHotelName(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -26,10 +26,10 @@ const CreateHotel = (props) => {
 
         const validationCheck = Joi.validate(
             {
-                hotelId: inputHotelId,
                 hotelName: inputHotelName,
+                newHotelName: inputNewHotelName,
             },
-            hotelValidation.createSchema,
+            hotelValidation.updateSchema,
         );
 
         const hotelData = validationCheck.value;
@@ -45,7 +45,7 @@ const CreateHotel = (props) => {
             toast.error(JSON.stringify(validationCheck.error.details[0].message));
         } else {
             toast.success("The request sent to the server!");
-            axios.post('/api/hotels/create', hotelData, options )
+            axios.patch('/api/hotels/update', hotelData, options )
             .then((response) => {
                 toast(response.data.message);
             })
@@ -64,29 +64,26 @@ const CreateHotel = (props) => {
 
     return (
         <>
-            <h2>Create Hotel</h2>
+            <h2>Updating Hotel</h2>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Hotel ID</Form.Label>
-                    <Form.Control type="text" id="inputHotelId" onChange={handleHotelIdChange} value={inputHotelId} placeholder="12345"/>
-                    <Form.Text className="text-muted">
-                        Enter a number with 4-8 characters.
-                    </Form.Text>
-                </Form.Group>
-
                 <Form.Group className="mb-3">
                     <Form.Label>Hotel Name</Form.Label>
                     <Form.Control type="text" id="inputHotelName" onChange={handleHotelNameChange} value={inputHotelName} placeholder="EG Tel Aviv"/>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" disabled={!inputHotelId || !inputHotelName}>
+                <Form.Group className="mb-3">
+                    <Form.Label>New Hotel Name</Form.Label>
+                    <Form.Control type="text" id="inputNewHotelName" onChange={handleNewHotelNameChange} value={inputNewHotelName} placeholder="EG Carmel"/>
+                </Form.Group>
+
+                <Button variant="primary" type="submit" disabled={!inputHotelName}>
                     Submit
                 </Button>
             </Form>
 
             <hr />
         </>
-    )
+    );
 };
 
-export default CreateHotel;
+export default FindHotel;

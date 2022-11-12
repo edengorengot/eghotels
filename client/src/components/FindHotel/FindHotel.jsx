@@ -7,15 +7,10 @@ import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const CreateHotel = (props) => {
+const FindHotel = (props) => {
     const token = props.token;
     const admin = props.admin;
-    const [inputHotelId, setInputHotelId] = useState("");
     const [inputHotelName, setInputHotelName] = useState("");
-
-    const handleHotelIdChange = (e) => {
-        setInputHotelId(e.target.value);
-    };
 
     const handleHotelNameChange = (e) => {
         setInputHotelName(e.target.value);
@@ -26,18 +21,16 @@ const CreateHotel = (props) => {
 
         const validationCheck = Joi.validate(
             {
-                hotelId: inputHotelId,
                 hotelName: inputHotelName,
             },
-            hotelValidation.createSchema,
+            hotelValidation.searchSchema,
         );
-
-        const hotelData = validationCheck.value;
 
         const options = {
             headers: {
                 token: token,
-                admin: admin
+                admin: admin,
+                hotelName: inputHotelName,
             },
         };
 
@@ -45,9 +38,17 @@ const CreateHotel = (props) => {
             toast.error(JSON.stringify(validationCheck.error.details[0].message));
         } else {
             toast.success("The request sent to the server!");
-            axios.post('/api/hotels/create', hotelData, options )
+            axios.get('/api/hotels/find', options )
             .then((response) => {
                 toast(response.data.message);
+                let savedHotel = response.data.databaseCheckerHotelName[0];
+                props.setHotel({
+                    _id: savedHotel._id,
+                    hotelId: savedHotel.hotelId,
+                    hotelName: savedHotel.hotelName,
+                    generalInformation: savedHotel.generalInformation,
+                });
+                props.setShowSpinnerHotelData(true);
             })
             .catch((err) => {
                 if (err.response) {
@@ -64,29 +65,21 @@ const CreateHotel = (props) => {
 
     return (
         <>
-            <h2>Create Hotel</h2>
+            <h2>Find Hotel</h2>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Hotel ID</Form.Label>
-                    <Form.Control type="text" id="inputHotelId" onChange={handleHotelIdChange} value={inputHotelId} placeholder="12345"/>
-                    <Form.Text className="text-muted">
-                        Enter a number with 4-8 characters.
-                    </Form.Text>
-                </Form.Group>
-
                 <Form.Group className="mb-3">
                     <Form.Label>Hotel Name</Form.Label>
                     <Form.Control type="text" id="inputHotelName" onChange={handleHotelNameChange} value={inputHotelName} placeholder="EG Tel Aviv"/>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" disabled={!inputHotelId || !inputHotelName}>
+                <Button variant="primary" type="submit" disabled={!inputHotelName}>
                     Submit
                 </Button>
             </Form>
 
             <hr />
         </>
-    )
+    );
 };
 
-export default CreateHotel;
+export default FindHotel;

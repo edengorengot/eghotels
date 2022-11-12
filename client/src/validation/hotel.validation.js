@@ -8,6 +8,10 @@ const hotelValidation = {
     searchSchema: {
         hotelName: Joi.string().min(1).max(255).required(),
     },
+    updateSchema: {
+        hotelName: Joi.string().min(1).max(255).required(),
+        newHotelName: Joi.string().min(1).max(255).required(),
+    },
 };
 
 export default hotelValidation;

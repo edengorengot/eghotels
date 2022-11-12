@@ -7,18 +7,27 @@ import { toast } from 'react-toastify';
 import AdminTier from '../components/AdminTier/AdminTier';
 import CreateHotel from '../components/CreateHotel/CreateHotel';
 import DeleteHotel from '../components/DeleteHotel/DeleteHotel';
+import FindHotel from '../components/FindHotel/FindHotel';
+import UpdateHotel from '../components/UpdateHotel/UpdateHotel';
+
 
 
 const AdminDashboard = () => {
     const token = localStorage.getItem("token");
     const admin = localStorage.getItem("admin");
     const [showSpinnerUserData, setShowSpinnerUserData] = useState(false);
+    const [showSpinnerHotelData, setShowSpinnerHotelData] = useState(false);
     const [user, setUser] = useState({});
+    const [hotel, setHotel] = useState({});
     const [key, setKey] = useState('home');
 
     useEffect(() => {
         setShowSpinnerUserData(false);
     }, [user]);
+
+    useEffect(() => {
+        setShowSpinnerHotelData(false);
+    }, [hotel]);
 
     useEffect(() => {
         setShowSpinnerUserData(true);
@@ -117,17 +126,41 @@ const AdminDashboard = () => {
 
                 <Tab eventKey="updateHotels" title="Update Hotels">
                     <div className="container">
-                        {/* <section className="center">
+                        <section className="center">
                             <div className="row">
                                 <div className="col-12 col-md-3"></div>
                                 <div className="col-12 col-md-6 form-box">
-                                    <h2>Update hotel</h2>
-                                    <h4>erwrekfg</h4>
-                                    <DeleteHotel token={token} admin={admin}/>
+                                    <FindHotel token={token} admin={admin} setHotel={setHotel} setShowSpinnerHotelData={setShowSpinnerHotelData}/>
                                 </div>
                                 <div className="col-12 col-md-3"></div>
                             </div>
-                        </section> */}
+
+                            <div className="row">
+                                <div className="col-12 col-md-3"></div>
+                                <div className="col-12 col-md-6">
+
+                                {showSpinnerHotelData && <SpinnerComponent/>}
+
+                                {
+                                    showSpinnerHotelData === false &&
+                                    <>
+                                        <h3>Loaded Hotel Data</h3>
+                                        <p>Hotel Name: {hotel.hotelName}</p>
+                                        <p>Hotel ID: {hotel.hotelId}</p>
+                                    </>
+                                }
+                                </div>
+                                <div className="col-12 col-md-3"></div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-12 col-md-3"></div>
+                                <div className="col-12 col-md-6 form-box">
+                                    <UpdateHotel token={token} admin={admin} setHotel={setHotel}/>
+                                </div>
+                                <div className="col-12 col-md-3"></div>
+                            </div>
+                        </section>
                     </div>
                 </Tab>
 
