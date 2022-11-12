@@ -9,8 +9,9 @@ const FavoriteHotels = (props) => {
             <p>You can add or delete your favorite hotels</p>
             {hotels.map((item) => {
                 return (
-                    <div className="col-12 col-md-3">
-                        <HotelCard hotelName={item.hotelName} hotelId={item.hotelId} id={item.id} key={item.id} handleFavoriteToggle={props.handleFavoriteToggle}/>
+                    <div className="col-12 col-md-3" key={item.id}>
+                        <HotelCard hotelName={item.hotelName} hotelId={item.hotelId} id={item.id} handleFavoriteToggle={props.handleFavoriteToggle}/>
+                        {/* <HotelCard hotelName={item.hotelName} hotelId={item.hotelId} id={item.id} key={item.id} handleFavoriteToggle={props.handleFavoriteToggle}/> */}
                     </div>
                 );
             })}

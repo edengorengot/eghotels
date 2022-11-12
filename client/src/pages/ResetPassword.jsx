@@ -80,13 +80,13 @@ const ResetPassword = () => {
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/general/reset-password-banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/general/reset-password-banner-responsive.jpeg"
                     alt=""
                 />
             </div>

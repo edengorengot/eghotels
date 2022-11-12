@@ -6,13 +6,13 @@ const TelAvivRooms = () => {
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/tel-aviv/banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/tel-aviv/banner-responsive.jpeg"
                     alt=""
                 />
             </div>
@@ -28,7 +28,7 @@ const TelAvivRooms = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/standard-tel-aviv.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Standard Rooms</h3>
                                 </div>
@@ -37,7 +37,7 @@ const TelAvivRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/executive-tel-aviv.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Executive Rooms</h3>
                                 </div>
@@ -46,9 +46,9 @@ const TelAvivRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/tel-aviv-suite.jpeg" alt="Card"/>
                                 <div className="card-body">
-                                    <h3 className="card-title">Tel Aviv Suit</h3>
+                                    <h3 className="card-title">Tel Aviv Suite</h3>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/tel-aviv/standard-tel-aviv-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Standard Rooms</h2>
@@ -74,7 +74,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row flex-row-reverse">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/tel-aviv/executive-tel-aviv-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Executive Rooms</h2>
@@ -91,7 +91,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/tel-aviv/tel-aviv-suite-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Tel Aviv Suit</h2>

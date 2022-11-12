@@ -66,13 +66,13 @@ const AdminDashboard = () => {
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/general/admin-banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/general/admin-banner-responsive.jpeg"
                     alt=""
                 />
             </div>

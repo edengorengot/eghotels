@@ -6,13 +6,13 @@ const About = () => {
             <div className="top-banner">
                     <img
                          className="fullSize"
-                        src="/images/placeholder-image-1920-700.jpg"
+                        src="/images/about/banner.jpeg"
                         alt=""
                     />
 
                     <img
                         className="responsiveImg"
-                        src="/images/placeholder-image-992-661.jpg"
+                        src="/images/about/banner-responsive.jpeg"
                         alt=""
                     />
             </div>
@@ -21,7 +21,7 @@ const About = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/about/main.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>About EG Hotels</h2>

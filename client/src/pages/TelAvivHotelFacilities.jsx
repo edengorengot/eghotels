@@ -6,13 +6,13 @@ const TelAvivHotelFacilities = () => {
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/tel-aviv/banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/tel-aviv/banner-responsive.jpeg"
                     alt=""
                 />
             </div>
@@ -24,7 +24,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/reception.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">24 Hour Front Desk</h3>
                                     <p className="card-text">
@@ -38,7 +38,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/gym.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Fitness Center</h3>
                                     <p className="card-text">
@@ -51,7 +51,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/lounge.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Business Lounge</h3>
                                     <p className="card-text">
@@ -69,7 +69,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/pool.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Swimming Pools</h3>
                                     <p className="card-text">
@@ -83,7 +83,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/carmel-spa.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Spa</h3>
                                     <p className="card-text">
@@ -96,7 +96,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/jacuzzi.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Jacuzzi</h3>
                                     <p className="card-text">
@@ -112,7 +112,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/kids-room.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Kids Club</h3>
                                     <p className="card-text">
@@ -124,7 +124,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/teens-room.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Teenagers Club</h3>
                                     <p className="card-text">
@@ -136,7 +136,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/synagogue.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Synagogue</h3>
                                     <p className="card-text">

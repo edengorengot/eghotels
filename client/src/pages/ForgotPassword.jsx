@@ -58,17 +58,17 @@ const ForgotPassword = () => {
     return (
         <>
             <div className="top-banner">
-                    <img
-                         className="fullSize"
-                        src="/images/placeholder-image-1920-700.jpg"
-                        alt=""
-                    />
+                <img
+                    className="fullSize"
+                    src="/images/general/forgot-password-banner.jpeg"
+                    alt=""
+                />
 
-                    <img
-                        className="responsiveImg"
-                        src="/images/placeholder-image-992-661.jpg"
-                        alt=""
-                    />
+                <img
+                    className="responsiveImg"
+                    src="/images/general/forgot-password-banner-responsive.jpeg"
+                    alt=""
+                />
             </div>
 
             <div className="main container">

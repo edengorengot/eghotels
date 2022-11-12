@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 const MyAccount = () => {
     const token = localStorage.getItem("token");
     const [showSpinnerUserData, setShowSpinnerUserData] = useState(false);
+    const [showFavorites, setShowFavorites] = useState(false);
     const [user, setUser] = useState({});
     const [hotels, setHotels] = useState([]);
     const [key, setKey] = useState('home');
@@ -112,23 +113,26 @@ const MyAccount = () => {
             toast.error("There was an error with the data retrieval");
         });
     };
-
+    
+    const handleShowFavorite = () => {
+        setShowFavorites(true);
+    };
+    
     return (
         <>
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/general/user-banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/general/user-banner-responsive.jpeg"
                     alt=""
                 />
             </div>
-
             <Tabs
                 activeKey={key}
                 onSelect={(k) => setKey(k)}
@@ -177,15 +181,21 @@ const MyAccount = () => {
                                             <div className="col-12 col-md-3"></div>
                                             <div className="col-12 col-md-6">
                                                 <h2>My Favorite Hotels</h2>
-
-                                                {user.favoriteHotels.map((item) => {
-                                                    let favoriteSearch = user.favoriteHotels.indexOf(item);
-                                                    return (
-                                                        <div className="col-12">
-                                                            <HotelCardFavorite hotelName={hotels[favoriteSearch].hotelName} hotelId={hotels[favoriteSearch].hotelId} id={hotels[favoriteSearch].id} key={hotels[favoriteSearch].id}/>
-                                                        </div>
-                                                    );
-                                                })}
+                                                <button className="btn btn-primary" onClick={handleShowFavorite}>Show Favorites</button>
+                                                {
+                                                    showFavorites &&
+                                                    <>
+                                                        {/* <h3>fdfdgsgfds</h3> */}
+                                                        {user.favoriteHotels.map((item) => {
+                                                            let favoriteSearch = user.favoriteHotels.indexOf(item);
+                                                            return (
+                                                                <div className="col-12" key={item}>
+                                                                    <HotelCardFavorite hotelName={hotels[favoriteSearch].hotelName} hotelId={hotels[favoriteSearch].hotelId} id={hotels[favoriteSearch].id} key={hotels[favoriteSearch].id}/>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </>
+                                                }
                                             </div>
                                             <div className="col-12 col-md-3"></div>
                                         </div>

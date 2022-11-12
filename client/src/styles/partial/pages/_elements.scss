@@ -51,7 +51,7 @@ section.info-banner {
 
 .form-box {
     background-color: $logoColor;
-    padding: 3em;
+    padding: 2em;
 };
 
 .form-link {
@@ -131,6 +131,10 @@ footer {
         .responsiveImg {
             display: inline-block;
         };
+    };
+
+    .form-box {
+        padding: 1em;
     };
 
 

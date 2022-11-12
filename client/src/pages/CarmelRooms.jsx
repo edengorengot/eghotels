@@ -6,13 +6,13 @@ const CarmelRooms = () => {
             <div className="top-banner">
                 <img
                     className="fullSize"
-                    src="/images/placeholder-image-1920-700.jpg"
+                    src="/images/carmel/banner.jpeg"
                     alt=""
                 />
 
                 <img
                     className="responsiveImg"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/carmel/banner-responsive.jpeg"
                     alt=""
                 />
             </div>
@@ -27,7 +27,7 @@ const CarmelRooms = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/standard-carmel.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Standard Rooms</h3>
                                 </div>
@@ -36,7 +36,7 @@ const CarmelRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/executive-carmel.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Executive Rooms</h3>
                                 </div>
@@ -45,9 +45,9 @@ const CarmelRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/suite-carmel.jpeg" alt="Card"/>
                                 <div className="card-body">
-                                    <h3 className="card-title">Carmel Suit</h3>
+                                    <h3 className="card-title">Carmel Suite</h3>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/carmel/standard-carmel-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Standard Rooms</h2>
@@ -73,7 +73,7 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row flex-row-reverse">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/carmel/executive-carmel-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Executive Rooms</h2>
@@ -90,10 +90,10 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/carmel/suite-carmel-box.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
-                            <h2>Carmel Suit</h2>
+                            <h2>Carmel Suite</h2>
                             <p>
                                 Spectacular very spacious living room area, overlooking the magnificent views of the sea.
                             </p>

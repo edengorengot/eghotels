@@ -17,7 +17,7 @@ const HomePage = () => {
                     <div className="overlay"></div>
                     <img
                         className="d-block w-100"
-                        src="/images/placeholder-image-1920-700.jpg"
+                        src="/images/home/slider-1.jpeg"
                         alt="First slide"
                     />
 {/*
@@ -32,7 +32,7 @@ const HomePage = () => {
                     <div className="overlay"></div>
                     <img
                         className="d-block w-100"
-                        src="/images/placeholder-image-1920-700.jpg"
+                        src="/images/home/slider-2.jpeg"
                         alt="Second slide"
                     />
                 </Carousel.Item>
@@ -41,7 +41,7 @@ const HomePage = () => {
                     <div className="overlay"></div>
                     <img
                         className="d-block w-100"
-                        src="/images/placeholder-image-1920-700.jpg"
+                        src="/images/home/slider-3.jpeg"
                         alt="Third slide"
                     />
                 </Carousel.Item>
@@ -49,7 +49,7 @@ const HomePage = () => {
             <div className="responsive-banner">
                 <img
                     className="d-block w-100"
-                    src="/images/placeholder-image-992-661.jpg"
+                    src="/images/home/slider-1-responsive.jpeg"
                     alt=""
                 />
             </div>
@@ -58,7 +58,7 @@ const HomePage = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/placeholder-image-500-500.jpg" alt="" />
+                            <img src="/images/home/about.jpeg" alt="" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Welcome to EG Hotels</h2>
@@ -85,7 +85,7 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/tel-aviv-location.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Tel Aviv Location</h3>
                                     <p className="card-text">Our hotel is in the center of the biggest city in Israel by the amazing sea.</p>
@@ -96,7 +96,7 @@ const HomePage = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/tel-aviv-rooms.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Tel Aviv Rooms</h3>
                                     <p className="card-text">The bright rooms at EG Tel Aviv all have Smart TVs. They have satellite TV and a work desk.</p>
@@ -107,7 +107,7 @@ const HomePage = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/tel-aviv-facilities.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Tel Aviv Facilities</h3>
                                     <p className="card-text">Our facilities contains: spa, swimming pool, poolside bar, jacuzzi, car parking etc...</p>
@@ -125,7 +125,7 @@ const HomePage = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/carmel-location.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Carmel Location</h3>
                                     <p className="card-text">Our hotel is in the center of the Carmel mountain in Haifa in a young and spicy position.</p>
@@ -136,7 +136,7 @@ const HomePage = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/carmel-rooms.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Carmel Rooms</h3>
                                     <p className="card-text">The huge rooms at EG Carmel have a top tier Smart TVs with satellite TV and a work desk.</p>
@@ -147,7 +147,7 @@ const HomePage = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/placeholder-image-286-180.jpg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/carmel-facilities.jpeg" alt="Card"/>
                                 <div className="card-body">
                                     <h3 className="card-title">EG Carmel Facilities</h3>
                                     <p className="card-text">Our facilities contains: spa, swimming pool, poolside bar, jacuzzi, car parking etc...</p>
