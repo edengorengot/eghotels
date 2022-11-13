@@ -11,7 +11,6 @@ const ForgotPassword = () => {
     const [inputEmail, setInputEmail] = useState("");
 
     const handleEmailChange = (e) => {
-        // console.log("Email:", e.target.value);
         setInputEmail(e.target.value);
     };
 
@@ -61,13 +60,13 @@ const ForgotPassword = () => {
                 <img
                     className="fullSize"
                     src="/images/general/forgot-password-banner.jpeg"
-                    alt=""
+                    alt="closed lock"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/forgot-password-banner-responsive.jpeg"
-                    alt=""
+                    alt="closed lock"
                 />
             </div>
 

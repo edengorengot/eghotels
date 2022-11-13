@@ -18,12 +18,10 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const handleEmailChange = (e) => {
-        // console.log("Email:", e.target.value);
         setInputEmail(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
-        // console.log("Password:", e.target.value);
         setInputPassword(e.target.value);
     };
 
@@ -96,13 +94,13 @@ const Login = () => {
                 <img
                     className="fullSize"
                     src="/images/general/login-banner.jpeg"
-                    alt=""
+                    alt="login screen in a tablet"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/login-banner-responsive.jpeg"
-                    alt=""
+                    alt="login screen in a tablet"
                 />
             </div>
 

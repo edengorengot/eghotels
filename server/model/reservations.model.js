@@ -1,3 +1,6 @@
+/* The reservation part is still in constructions for the future */
+
+
 // const mongoose = require("mongoose");
 
 // const reservationSchema = new mongoose.Schema({

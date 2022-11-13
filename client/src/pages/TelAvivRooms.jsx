@@ -7,13 +7,13 @@ const TelAvivRooms = () => {
                 <img
                     className="fullSize"
                     src="/images/tel-aviv/banner.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/tel-aviv/banner-responsive.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
             </div>
 
@@ -28,7 +28,7 @@ const TelAvivRooms = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/standard-tel-aviv.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/standard-tel-aviv.jpeg" alt="Standard Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Standard Rooms</h3>
                                 </div>
@@ -37,7 +37,7 @@ const TelAvivRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/executive-tel-aviv.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/executive-tel-aviv.jpeg" alt="Executive Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Executive Rooms</h3>
                                 </div>
@@ -46,7 +46,7 @@ const TelAvivRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/tel-aviv-suite.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/tel-aviv-suite.jpeg" alt="Tel Aviv Suite"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Tel Aviv Suite</h3>
                                 </div>
@@ -60,7 +60,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/tel-aviv/standard-tel-aviv-box.jpeg" alt="" />
+                            <img src="/images/tel-aviv/standard-tel-aviv-box.jpeg" alt="Standard Rooms" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Standard Rooms</h2>
@@ -74,7 +74,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row flex-row-reverse">
                         <div className="col-12 col-md-6">
-                            <img src="/images/tel-aviv/executive-tel-aviv-box.jpeg" alt="" />
+                            <img src="/images/tel-aviv/executive-tel-aviv-box.jpeg" alt="Executive Rooms" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Executive Rooms</h2>
@@ -91,7 +91,7 @@ const TelAvivRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/tel-aviv/tel-aviv-suite-box.jpeg" alt="" />
+                            <img src="/images/tel-aviv/tel-aviv-suite-box.jpeg" alt="Tel Aviv Suite" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Tel Aviv Suit</h2>

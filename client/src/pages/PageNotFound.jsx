@@ -9,7 +9,7 @@ const PageNotFound = () => {
                     <div className="row">
                         <div className="col-12 col-md-3"></div>
                         <div className="col-12 col-md-6">
-                            <img src="/images/general/page-not-found.jpeg" alt="" />
+                            <img src="/images/general/page-not-found.jpeg" alt="page not found" />
                             <h2>Error 404 - Missing Page</h2>
                             <p>
                                 Our apologies, we cannot find the page you are looking for.

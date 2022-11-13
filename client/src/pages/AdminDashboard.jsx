@@ -67,13 +67,13 @@ const AdminDashboard = () => {
                 <img
                     className="fullSize"
                     src="/images/general/admin-banner.jpeg"
-                    alt=""
+                    alt="man with a lock sign"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/admin-banner-responsive.jpeg"
-                    alt=""
+                    alt="man with a lock sign"
                 />
             </div>
 

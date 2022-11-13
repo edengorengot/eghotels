@@ -14,22 +14,18 @@ const ContactUs = () => {
     const [inputBody, setInputBody] = useState("");
 
     const handleFirstNameChange = (e) => {
-        // console.log("First Name:", e.target.value);
         setInputFirstName(e.target.value);
     };
 
     const handleLastNameChange = (e) => {
-        // console.log("Last Name:", e.target.value);
         setInputLastName(e.target.value);
     };
 
     const handleEmailChange = (e) => {
-        // console.log("Email:", e.target.value);
         setInputEmail(e.target.value);
     };
 
     const handleBodyChange = (e) => {
-        // console.log("Body:", e.target.value);
         setInputBody(e.target.value);
     };
 
@@ -85,13 +81,13 @@ const ContactUs = () => {
                 <img
                     className="fullSize"
                     src="/images/general/contact-banner.jpeg"
-                    alt=""
+                    alt="man press on a ipad"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/contact-banner-responsive.jpeg"
-                    alt=""
+                    alt="man press on a ipad"
                 />
             </div>
 

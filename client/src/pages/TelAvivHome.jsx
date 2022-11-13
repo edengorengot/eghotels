@@ -8,21 +8,20 @@ const TelAvivHome = () => {
                 <img
                     className="fullSize"
                     src="/images/tel-aviv/banner.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/tel-aviv/banner-responsive.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
             </div>
-
             <div className="main container">
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/tel-aviv/tel-aviv-about.jpeg" alt="" />
+                            <img src="/images/tel-aviv/tel-aviv-about.jpeg" alt="Tel Aviv night at the beach" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>About EG Tel Aviv</h2>
@@ -45,7 +44,7 @@ const TelAvivHome = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/standard-tel-aviv.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/standard-tel-aviv.jpeg" alt="Standard Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Standard Rooms</h3>
                                     <p className="card-text">The Standard Rooms are equipped with a working desk, sofa, 40-inch Smart TV, USB hubs as well as a wet-room style bathroom with a shower, heated floors and towel rails.</p>
@@ -56,7 +55,7 @@ const TelAvivHome = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/executive-tel-aviv.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/executive-tel-aviv.jpeg" alt="Executive Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Executive Rooms</h3>
                                     <p className="card-text">The Executive Rooms offer sea views, a seating area, work desk, additional wardrobe space, 44-inch Smart TV, USB hubs as well as a wet-room style bathroom with a shower, heated floor and towel rails.</p>
@@ -67,9 +66,9 @@ const TelAvivHome = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/tel-aviv/tel-aviv-suite.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/tel-aviv/tel-aviv-suite.jpeg" alt="Suite Rooms"/>
                                 <div className="card-body">
-                                    <h3 className="card-title">Tel Aviv Suit</h3>
+                                    <h3 className="card-title">Tel Aviv Suite</h3>
                                     <p className="card-text">These Tel Aviv suites are one-bedroom suites featuring an open-plan design and offer panoramic views, a separate seating area, dining table, 55-inch Smart TV, USB hubs as well as a bathroom with heated flooring, a bathtub and walk-in shower.</p>
                                     <Link className="btn btn-dark" to={"/tel-aviv-rooms"}>Click here</Link>
                                 </div>
@@ -100,7 +99,7 @@ const TelAvivHome = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/carmel-spa.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/carmel-spa.jpeg" alt="Spa"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Spa</h3>
                                     <p className="card-text">
@@ -113,7 +112,7 @@ const TelAvivHome = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/parking.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/parking.jpeg" alt="Parking"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Free Parking</h3>
                                     <p className="card-text">
@@ -127,7 +126,7 @@ const TelAvivHome = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/home/tel-aviv-facilities.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/home/tel-aviv-facilities.jpeg" alt="Swimming Pool"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Swimming Pool</h3>
                                     <p className="card-text">

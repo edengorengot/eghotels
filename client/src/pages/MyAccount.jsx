@@ -124,13 +124,13 @@ const MyAccount = () => {
                 <img
                     className="fullSize"
                     src="/images/general/user-banner.jpeg"
-                    alt=""
+                    alt="ball with images in a hand"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/user-banner-responsive.jpeg"
-                    alt=""
+                    alt="ball with images in a hand"
                 />
             </div>
             <Tabs
@@ -161,20 +161,6 @@ const MyAccount = () => {
                                     </section>
 
                                     <hr />
-                                {/* 
-                                    <section className="center">
-                                        <div className="row">
-                                            <div className="col-12 col-md-3"></div>
-                                            <div className="col-12 col-md-6 form-box">
-                                                <h2>My Active Reservations</h2>
-                                                <h1>On Constructions</h1>
-                                            </div>
-                                            <div className="col-12 col-md-3"></div>
-                                        </div>
-                                    </section>
-
-                                    <hr />
-                                */}
 
                                     <section className="center">
                                         <div className="row">
@@ -185,7 +171,6 @@ const MyAccount = () => {
                                                 {
                                                     showFavorites &&
                                                     <>
-                                                        {/* <h3>fdfdgsgfds</h3> */}
                                                         {user.favoriteHotels.map((item) => {
                                                             let favoriteSearch = user.favoriteHotels.indexOf(item);
                                                             return (
@@ -205,14 +190,6 @@ const MyAccount = () => {
                         }
                     </div>
                 </Tab>
-
-                {/* <Tab eventKey="reservations" title="Reservations">
-                    <div className="container">
-                        <h2>My Favorite Hotels</h2>
-                        <h2>My Reservations</h2>
-                        <h1>On Constructions</h1>
-                    </div>
-                </Tab> */}
 
                 <Tab eventKey="profile" title="My Profile">
                     <div className="container">
@@ -238,14 +215,6 @@ const MyAccount = () => {
                         </section>
                     </div>
                 </Tab>
-
-                {/* <Tab eventKey="contact" title="Contact">
-                    <div className="container">
-                        <h2>Contact Us</h2>
-                        <h5>Open Socket</h5>
-                        <h1>On Constructions</h1>
-                    </div>
-                </Tab> */}
 
                 <Tab eventKey="settings" title="Settings">
                     <div className="container">

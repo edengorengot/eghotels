@@ -21,37 +21,30 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     const handleFirstNameChange = (e) => {
-        // console.log("First Name:", e.target.value);
         setInputFirstName(e.target.value);
     };
 
     const handleLastNameChange = (e) => {
-        // console.log("Last Name:", e.target.value);
         setInputLastName(e.target.value);
     };
 
     const handleEmailChange = (e) => {
-        // console.log("Email:", e.target.value);
         setInputEmail(e.target.value);
     };
     
     const handleMobilePhoneChange = (e) => {
-        // console.log("Mobile Phone:", e.target.value);
         setInputMobilePhone(e.target.value);
     };
 
     const handleTelephoneChange = (e) => {
-        // console.log("Telephone:", e.target.value);
         setInputTelephone(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
-        // console.log("Password:", e.target.value);
         setInputPassword(e.target.value);
     };
 
     const handlePasswordRepeatChange = (e) => {
-        // console.log("Password Repeat:", e.target.value);
         setInputPasswordRepeat(e.target.value);
     };
 
@@ -155,13 +148,13 @@ const Signup = () => {
                 <img
                     className="fullSize"
                     src="/images/general/signup-banner.jpeg"
-                    alt=""
+                    alt="man pressing on the register button"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/signup-banner-responsive.jpeg"
-                    alt=""
+                    alt="man pressing on the register button"
                 />
             </div>
 

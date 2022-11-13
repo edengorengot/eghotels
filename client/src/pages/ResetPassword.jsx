@@ -13,12 +13,10 @@ const ResetPassword = () => {
     const history = useHistory();
 
     const handlePasswordChange = (e) => {
-        // console.log("Password:", e.target.value);
         setInputPassword(e.target.value);
     };
 
     const handlePasswordRepeatChange = (e) => {
-        // console.log("Password Repeat:", e.target.value);
         setInputPasswordRepeat(e.target.value);
     };
 
@@ -81,13 +79,13 @@ const ResetPassword = () => {
                 <img
                     className="fullSize"
                     src="/images/general/reset-password-banner.jpeg"
-                    alt=""
+                    alt="open lock"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/general/reset-password-banner-responsive.jpeg"
-                    alt=""
+                    alt="open lock"
                 />
             </div>
 

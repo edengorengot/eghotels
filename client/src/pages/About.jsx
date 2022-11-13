@@ -7,13 +7,13 @@ const About = () => {
                     <img
                          className="fullSize"
                         src="/images/about/banner.jpeg"
-                        alt=""
+                        alt="laptop with a cup with lake view"
                     />
 
                     <img
                         className="responsiveImg"
                         src="/images/about/banner-responsive.jpeg"
-                        alt=""
+                        alt="laptop with a cup with lake view"
                     />
             </div>
 
@@ -21,7 +21,7 @@ const About = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/about/main.jpeg" alt="" />
+                            <img src="/images/about/main.jpeg" alt="hotel's lobby" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>About EG Hotels</h2>

@@ -25,7 +25,7 @@ const Logout = () => {
                         <div className="col-12 col-md-6">
                             <h2>Log Out Page</h2>
                             <p>This is the Log-Out page, you don't supposed to see it for long.</p>
-                            <img src="/images/general/logout.jpeg" alt="" />
+                            <img src="/images/general/logout.jpeg" alt="closed safe" />
                             <p>Our apologies, we cannot help you here.</p>
                         </div>
                         <div className="col-12 col-md-3"></div>

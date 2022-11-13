@@ -7,13 +7,13 @@ const CarmelRooms = () => {
                 <img
                     className="fullSize"
                     src="/images/carmel/banner.jpeg"
-                    alt=""
+                    alt="pool with seats"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/carmel/banner-responsive.jpeg"
-                    alt=""
+                    alt="pool with seats"
                 />
             </div>
 
@@ -27,7 +27,7 @@ const CarmelRooms = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/standard-carmel.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/standard-carmel.jpeg" alt="Standard Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Standard Rooms</h3>
                                 </div>
@@ -36,7 +36,7 @@ const CarmelRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/executive-carmel.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/executive-carmel.jpeg" alt="Executive Rooms"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Executive Rooms</h3>
                                 </div>
@@ -45,7 +45,7 @@ const CarmelRooms = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/suite-carmel.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/suite-carmel.jpeg" alt="Carmel Suite"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Carmel Suite</h3>
                                 </div>
@@ -59,7 +59,7 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/carmel/standard-carmel-box.jpeg" alt="" />
+                            <img src="/images/carmel/standard-carmel-box.jpeg" alt="Standard Rooms" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Standard Rooms</h2>
@@ -73,7 +73,7 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row flex-row-reverse">
                         <div className="col-12 col-md-6">
-                            <img src="/images/carmel/executive-carmel-box.jpeg" alt="" />
+                            <img src="/images/carmel/executive-carmel-box.jpeg" alt="Executive Rooms" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Executive Rooms</h2>
@@ -90,7 +90,7 @@ const CarmelRooms = () => {
                 <section className="responsive-center">
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <img src="/images/carmel/suite-carmel-box.jpeg" alt="" />
+                            <img src="/images/carmel/suite-carmel-box.jpeg" alt="Carmel Suite" />
                         </div>
                         <div className="col-12 col-md-6">
                             <h2>Carmel Suite</h2>

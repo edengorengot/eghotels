@@ -7,13 +7,13 @@ const TelAvivHotelFacilities = () => {
                 <img
                     className="fullSize"
                     src="/images/tel-aviv/banner.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
 
                 <img
                     className="responsiveImg"
                     src="/images/tel-aviv/banner-responsive.jpeg"
-                    alt=""
+                    alt="sea view of Tel Aviv"
                 />
             </div>
 
@@ -24,7 +24,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/reception.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/reception.jpeg" alt="reception desk"/>
                                 <div className="card-body">
                                     <h3 className="card-title">24 Hour Front Desk</h3>
                                     <p className="card-text">
@@ -38,7 +38,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/gym.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/gym.jpeg" alt="gym"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Fitness Center</h3>
                                     <p className="card-text">
@@ -51,7 +51,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/lounge.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/lounge.jpeg" alt="Lounge"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Business Lounge</h3>
                                     <p className="card-text">
@@ -69,7 +69,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/pool.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/pool.jpeg" alt="Swimming Pools"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Swimming Pools</h3>
                                     <p className="card-text">
@@ -83,7 +83,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/carmel-spa.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/carmel-spa.jpeg" alt="Spa"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Spa</h3>
                                     <p className="card-text">
@@ -96,7 +96,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/jacuzzi.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/jacuzzi.jpeg" alt="Jacuzzi"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Jacuzzi</h3>
                                     <p className="card-text">
@@ -112,7 +112,7 @@ const TelAvivHotelFacilities = () => {
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/kids-room.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/kids-room.jpeg" alt="Kids Club"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Kids Club</h3>
                                     <p className="card-text">
@@ -124,7 +124,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/teens-room.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/teens-room.jpeg" alt="ps5"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Teenagers Club</h3>
                                     <p className="card-text">
@@ -136,7 +136,7 @@ const TelAvivHotelFacilities = () => {
 
                         <div className="col-12 col-md-4">
                             <div className="card">
-                                <img className="card-img-top" src="/images/carmel/synagogue.jpeg" alt="Card"/>
+                                <img className="card-img-top" src="/images/carmel/synagogue.jpeg" alt="Synagogue"/>
                                 <div className="card-body">
                                     <h3 className="card-title">Synagogue</h3>
                                     <p className="card-text">
