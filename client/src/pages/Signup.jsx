@@ -113,6 +113,7 @@ const Signup = () => {
                         toast(response.data.message);
 
                         localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('loggedIn', true);
                         dispatch(authActions.login());
                         history.push('/my-account');
                     })

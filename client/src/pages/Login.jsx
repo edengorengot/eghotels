@@ -54,6 +54,7 @@ const Login = () => {
                 toast(response.data.message);
                 if (response.data.message === "You have successfully logged in.") {
                     localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('loggedIn', true);
                     dispatch(authActions.login());
                     
                     if (response.data.admin) {

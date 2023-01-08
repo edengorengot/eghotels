@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 
 const AuthGuardRoute = ({ component: Component, ...rest }) => {
     const loggedIn = useSelector((state) => state.auth.loggedIn);
+    const isLoggedIn = localStorage.getItem('loggedIn');
 
     return (
         <Route
             {...rest}
             render={(props) => {
-                return loggedIn === true ? (
+                // return loggedIn === true ? (
+                return loggedIn || isLoggedIn === true ? (
                     <Component {...props}/>
                 ) : (
                     toast.error("You have to logged in first."),
