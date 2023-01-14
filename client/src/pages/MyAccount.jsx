@@ -172,10 +172,10 @@ const MyAccount = () => {
                                                     showFavorites &&
                                                     <>
                                                         {user.favoriteHotels.map((item) => {
-                                                            let favoriteSearch = user.favoriteHotels.indexOf(item);
+                                                            let favoriteSearch = hotels.find(({id}) => (id === item));
                                                             return (
                                                                 <div className="col-12" key={item}>
-                                                                    <HotelCardFavorite hotelName={hotels[favoriteSearch].hotelName} hotelId={hotels[favoriteSearch].hotelId} id={hotels[favoriteSearch].id} key={hotels[favoriteSearch].id}/>
+                                                                    <HotelCardFavorite hotelName={favoriteSearch.hotelName} hotelId={favoriteSearch.hotelId} id={favoriteSearch.id} key={favoriteSearch.id}/>
                                                                 </div>
                                                             );
                                                         })}

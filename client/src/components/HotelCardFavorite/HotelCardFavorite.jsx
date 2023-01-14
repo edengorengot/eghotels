@@ -1,6 +1,8 @@
 import Card from 'react-bootstrap/Card';
 
 const HotelCardFavorite = (props) => {
+    // console.log("Props", props);
+
     const hotelName = props.hotelName;
     const hotelId = props.hotelId;
 
